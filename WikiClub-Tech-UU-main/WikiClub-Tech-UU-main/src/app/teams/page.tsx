@@ -2,22 +2,19 @@
 
 import { useEffect, useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Archive, ArrowDown, ArrowUp, Users } from 'lucide-react';
+import { Archive, ArrowDown, ArrowUp, Crown, Users } from 'lucide-react';
 import TeamMemberCard from '@/components/team/TeamMemberCard';
 import {
+  currentTeamDemoMembers,
   currentTeamMembers,
+  founderDemoMembers,
   previousTeamMembers,
 } from '@/data/team_data/teamMembers';
 import { Button } from '@/components/ui/button';
 import WikimediaBackground from '@/components/team/WikimediaBackground';
 import Image from 'next/image';
 
-type RoleFilter =
-  | 'coordinator'
-  | 'mentor'
-  | 'envoy'
-  | 'lead'
-  | 'volunteer';
+type RoleFilter = 'coordinator' | 'mentor' | 'envoy' | 'lead' | 'volunteer';
 
 const roleLabels: Record<RoleFilter, string> = {
   coordinator: 'Project Coordinators',
@@ -35,16 +32,19 @@ const sectionOrder: RoleFilter[] = [
   'volunteer',
 ];
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '/wikiclubtech-nitin';
+const assetPath = (src: string) =>
+  src.startsWith('http') || src.startsWith('data:') || src.startsWith(BASE_PATH)
+    ? src
+    : `${BASE_PATH}${src.startsWith('/') ? src : `/${src}`}`;
+
 const groupMembersByRole = (
-  members: typeof currentTeamMembers
-): Record<RoleFilter, typeof currentTeamMembers> =>
+  members: typeof currentTeamDemoMembers
+): Record<RoleFilter, typeof currentTeamDemoMembers> =>
   members.reduce(
     (acc, member) => {
       const role = member.roleType.trim().toLowerCase() as RoleFilter;
-      if (!acc[role]) {
-        acc[role] = [];
-      }
-      acc[role].push(member);
+      if (role in acc) acc[role].push(member);
       return acc;
     },
     {
@@ -53,58 +53,56 @@ const groupMembersByRole = (
       envoy: [],
       lead: [],
       volunteer: [],
-    } as Record<RoleFilter, typeof currentTeamMembers>
+    } as Record<RoleFilter, typeof currentTeamDemoMembers>
   );
 
 const TeamSections = ({
   members,
   idPrefix,
-  emptyMessage,
 }: {
-  members: typeof currentTeamMembers;
+  members: typeof currentTeamDemoMembers;
   idPrefix: string;
-  emptyMessage?: string;
 }) => {
   const membersByRole = useMemo(() => groupMembersByRole(members), [members]);
-
-  if (members.length === 0 && emptyMessage) {
-    return (
-      <div className='rounded-3xl border border-dashed border-border/60 bg-muted/30 px-6 py-14 text-center'>
-        <Users className='mx-auto mb-4 h-10 w-10 text-muted-foreground' />
-        <h3 className='text-xl font-bold'>Current team roster is ready to be added</h3>
-        <p className='mx-auto mt-2 max-w-xl text-sm text-muted-foreground'>
-          {emptyMessage}
-        </p>
-      </div>
-    );
-  }
 
   return (
     <div className='space-y-24'>
       {sectionOrder.map((role) => {
         const roleMembers = membersByRole[role];
-        if (!roleMembers || roleMembers.length === 0) return null;
+        if (!roleMembers?.length) return null;
 
         return (
-          <section key={`${idPrefix}-${role}`} id={`${idPrefix}-${role}`} className='scroll-mt-32'>
+          <section
+            key={`${idPrefix}-${role}`}
+            id={`${idPrefix}-${role}`}
+            className='scroll-mt-32'
+          >
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5 }}
-              className='mb-12 text-center'
+              className='mb-10 text-center'
             >
               <p className='mb-2 text-xs font-bold uppercase tracking-[0.24em] text-primary'>
                 {roleMembers.length} {roleMembers.length === 1 ? 'member' : 'members'}
               </p>
-              <h2 className='text-3xl font-bold md:text-4xl'>
-                {roleLabels[role]}
-              </h2>
+              <h2 className='text-3xl font-bold md:text-4xl'>{roleLabels[role]}</h2>
             </motion.div>
 
-            <motion.div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'>
+            <motion.div
+              className={
+                role === 'coordinator'
+                  ? 'mx-auto max-w-5xl space-y-6'
+                  : 'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'
+              }
+            >
               {roleMembers.map((member) => (
-                <TeamMemberCard key={member.id} {...member} />
+                <TeamMemberCard
+                  key={member.id}
+                  {...member}
+                  demo={member.id.startsWith('demo-')}
+                />
               ))}
             </motion.div>
           </section>
@@ -120,7 +118,7 @@ const RoleNavigation = ({
   onNavigate,
   idPrefix,
 }: {
-  members: typeof currentTeamMembers;
+  members: typeof currentTeamDemoMembers;
   activeSection: RoleFilter;
   onNavigate: (id: string) => void;
   idPrefix: string;
@@ -131,8 +129,8 @@ const RoleNavigation = ({
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
-      className='sticky top-16 z-40 mb-16 flex flex-wrap justify-center gap-3 rounded-2xl border border-white/20 bg-white/10 px-4 py-4 shadow-[0_4px_30px_rgba(0,0,0,0.1)] backdrop-blur-lg'
+      transition={{ duration: 0.6 }}
+      className='sticky top-16 z-40 mb-16 flex flex-wrap justify-center gap-3 rounded-2xl border border-white/30 bg-white/80 px-4 py-4 shadow-lg backdrop-blur-xl'
     >
       {sectionOrder.map((role, index) => {
         if (!membersByRole[role]?.length) return null;
@@ -149,8 +147,8 @@ const RoleNavigation = ({
               variant={activeSection === role ? 'default' : 'outline'}
               className={`rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 ${
                 activeSection === role
-                  ? 'scale-105 border-0 bg-gradient-to-r from-blue-300 to-cyan-500 text-white shadow-xl'
-                  : 'hover:text-primary hover:scale-105'
+                  ? 'scale-105 border-0 bg-gradient-to-r from-blue-400 to-cyan-500 text-white shadow-xl'
+                  : 'bg-white hover:scale-105 hover:text-primary'
               }`}
             >
               {roleLabels[role]}
@@ -162,27 +160,47 @@ const RoleNavigation = ({
   );
 };
 
+const FoundersSection = () => (
+  <section aria-labelledby='founders-heading' className='mb-28'>
+    <div className='mx-auto mb-10 max-w-3xl text-center'>
+      <div className='mb-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200'>
+        <Crown className='h-4 w-4' />
+        The Beginning
+      </div>
+      <h2 id='founders-heading' className='text-4xl font-black tracking-tight md:text-5xl'>
+        Our Founders
+      </h2>
+      <p className='mt-4 text-muted-foreground'>
+        The people who started the journey and helped shape the vision of WikiClub Tech.
+      </p>
+    </div>
+
+    <div className='mx-auto max-w-5xl space-y-6'>
+      {founderDemoMembers.map((member) => (
+        <TeamMemberCard key={member.id} {...member} demo />
+      ))}
+    </div>
+  </section>
+);
+
 const Index = () => {
   const [showPreviousTeam, setShowPreviousTeam] = useState(false);
-  const [activeSection, setActiveSection] = useState<RoleFilter>(
-    sectionOrder[0]
-  );
+  const displayedCurrentMembers =
+    currentTeamMembers.length > 0 ? currentTeamMembers : currentTeamDemoMembers;
+
+  const [activeSection, setActiveSection] = useState<RoleFilter>('coordinator');
   const [activePreviousSection, setActivePreviousSection] =
-    useState<RoleFilter>(sectionOrder[0]);
+    useState<RoleFilter>('coordinator');
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
-
     if (!element) return;
 
     const headerOffset = 120;
     const offsetPosition =
       element.getBoundingClientRect().top + window.scrollY - headerOffset;
 
-    window.scrollTo({
-      top: offsetPosition,
-      behavior: 'smooth',
-    });
+    window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -204,16 +222,12 @@ const Index = () => {
           );
         }
       },
-      {
-        rootMargin: '-140px 0px -55% 0px',
-        threshold: [0.1, 0.25, 0.5],
-      }
+      { rootMargin: '-140px 0px -55% 0px', threshold: [0.1, 0.25, 0.5] }
     );
 
     sections.forEach((section) => observer.observe(section));
-
     return () => observer.disconnect();
-  }, [currentTeamMembers.length]);
+  }, [displayedCurrentMembers.length]);
 
   useEffect(() => {
     if (!showPreviousTeam) return;
@@ -236,27 +250,24 @@ const Index = () => {
           );
         }
       },
-      {
-        rootMargin: '-140px 0px -55% 0px',
-        threshold: [0.1, 0.25, 0.5],
-      }
+      { rootMargin: '-140px 0px -55% 0px', threshold: [0.1, 0.25, 0.5] }
     );
 
     sections.forEach((section) => observer.observe(section));
-
     return () => observer.disconnect();
   }, [showPreviousTeam]);
 
   const handlePreviousTeamToggle = () => {
-    setShowPreviousTeam((current) => !current);
+    const next = !showPreviousTeam;
+    setShowPreviousTeam(next);
 
-    if (!showPreviousTeam) {
+    if (next) {
       window.setTimeout(() => {
         document.getElementById('previous-team')?.scrollIntoView({
           behavior: 'smooth',
           block: 'start',
         });
-      }, 50);
+      }, 80);
     }
   };
 
@@ -264,7 +275,6 @@ const Index = () => {
     <div className='min-h-screen bg-background'>
       <header className='relative overflow-hidden px-6 py-24 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]'>
         <div className='absolute inset-0 bg-gradient-to-br from-blue-100 via-green-100 to-red-100' />
-
         <WikimediaBackground />
 
         <div className='container relative z-10 mx-auto max-w-6xl'>
@@ -281,14 +291,14 @@ const Index = () => {
             >
               <div className='relative flex h-24 w-24 items-center justify-center rounded-3xl'>
                 <Image
-                  src='/borderless_logo.svg'
+                  src={assetPath('/borderless_logo.svg')}
                   width={80}
                   height={80}
                   alt='Wikimedia Logo'
                   className='absolute h-20 w-20 object-contain'
                 />
                 <motion.img
-                  src='/logo.svg'
+                  src={assetPath('/logo.svg')}
                   alt='Rotating Ring'
                   className='absolute h-20 w-20 object-contain'
                   animate={{ rotate: 360 }}
@@ -308,14 +318,16 @@ const Index = () => {
               Our Mission, Our People
             </h1>
             <p className='mx-auto max-w-3xl text-xl font-medium text-black/95 drop-shadow md:text-2xl'>
-              Meet the people building the next chapter of WikiClub and making
-              knowledge accessible to everyone.
+              More than a team page — discover the people, story, and community
+              behind WikiClub Tech.
             </p>
           </motion.div>
         </div>
       </header>
 
       <main className='container mx-auto max-w-7xl px-6 py-16'>
+        <FoundersSection />
+
         <section aria-labelledby='current-team-heading' className='scroll-mt-32'>
           <div className='mx-auto mb-12 max-w-3xl text-center'>
             <div className='mb-4 inline-flex items-center gap-2 rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-sm font-bold text-primary'>
@@ -326,28 +338,18 @@ const Index = () => {
               The Team Behind WikiClub
             </h2>
             <p className='mt-4 text-muted-foreground'>
-              Meet the current contributors, coordinators, mentors, envoys, and
-              leads shaping WikiClub today.
+              Every role below currently shows a demo profile until the real
+              2026–27 roster is supplied.
             </p>
           </div>
 
-          {currentTeamMembers.length > 0 ? (
-            <>
-              <RoleNavigation
-                members={currentTeamMembers}
-                activeSection={activeSection}
-                onNavigate={scrollToSection}
-                idPrefix='current'
-              />
-              <TeamSections members={currentTeamMembers} idPrefix='current' />
-            </>
-          ) : (
-            <TeamSections
-              members={currentTeamMembers}
-              idPrefix='current'
-              emptyMessage='The new roster has not been added to the repository yet. Once the current members are supplied, they will appear here by default without changing the archived team.'
-            />
-          )}
+          <RoleNavigation
+            members={displayedCurrentMembers}
+            activeSection={activeSection}
+            onNavigate={scrollToSection}
+            idPrefix='current'
+          />
+          <TeamSections members={displayedCurrentMembers} idPrefix='current' />
         </section>
 
         <section
@@ -363,8 +365,7 @@ const Index = () => {
               Previous Team
             </h2>
             <p className='mt-4 text-muted-foreground'>
-              Explore the people who contributed to WikiClub before the current
-              team.
+              Explore the people who contributed to WikiClub before the current team.
             </p>
 
             <Button
@@ -404,10 +405,7 @@ const Index = () => {
                   onNavigate={scrollToSection}
                   idPrefix='previous'
                 />
-                <TeamSections
-                  members={previousTeamMembers}
-                  idPrefix='previous'
-                />
+                <TeamSections members={previousTeamMembers} idPrefix='previous' />
               </motion.div>
             )}
           </AnimatePresence>
