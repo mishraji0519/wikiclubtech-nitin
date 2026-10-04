@@ -2,7 +2,7 @@ export interface TeamMember {
   id: string;
   name: string;
   role: string;
-  roleType: "coordinator" | "envoy" | "lead" | "mentor" | "volunteer";
+  roleType: "founder" | "coordinator" | "envoy" | "lead" | "mentor" | "volunteer";
   image: string;
   email?: string;
   linkedin?: string;
@@ -382,19 +382,77 @@ export const previousTeamMembers: TeamMember[] = [
  * The Teams page intentionally renders this list first.
  */
 export const currentTeamMembers: TeamMember[] = [
-  // Add the new/current team members here.
-  // Example:
-  // {
-  //   id: "current-1",
-  //   name: "Member Name",
-  //   role: "Team Lead",
-  //   roleType: "lead",
-  //   image: "/team/member-image.jpg",
-  //   email: "member@example.com",
-  //   linkedin: "https://www.linkedin.com/in/username/",
-  //   github: "https://github.com/username",
-  //   bio: "Short member bio.",
-  // },
+  // Add the real 2026–27 roster here. These demo entries below are kept separate
+  // so the page can preview the final layout until the real roster is supplied.
+]; 
+
+export const currentTeamDemoMembers: TeamMember[] = [
+  {
+    id: "demo-coordinator",
+    name: "Demo Coordinator",
+    role: "Project Coordinator",
+    roleType: "coordinator",
+    image: "",
+    email: "demo@example.com",
+    bio: "Demo content — replace this member with the real Project Coordinator details.",
+  },
+  {
+    id: "demo-mentor",
+    name: "Demo Mentor",
+    role: "Mentor",
+    roleType: "mentor",
+    image: "",
+    email: "demo@example.com",
+    bio: "Demo content — replace this member with the real Mentor details.",
+  },
+  {
+    id: "demo-envoy",
+    name: "Demo Campus Envoy",
+    role: "Campus Envoy",
+    roleType: "envoy",
+    image: "",
+    email: "demo@example.com",
+    bio: "Demo content — replace this member with the real Campus Envoy details.",
+  },
+  {
+    id: "demo-lead",
+    name: "Demo Team Lead",
+    role: "Team Lead",
+    roleType: "lead",
+    image: "",
+    email: "demo@example.com",
+    bio: "Demo content — replace this member with the real Team Lead details.",
+  },
+  {
+    id: "demo-volunteer",
+    name: "Demo Volunteer",
+    role: "Volunteer",
+    roleType: "volunteer",
+    image: "",
+    email: "demo@example.com",
+    bio: "Demo content — replace this member with the real Volunteer details.",
+  },
+];
+
+export const founderDemoMembers: TeamMember[] = [
+  {
+    id: "demo-founder-1",
+    name: "Founder Name",
+    role: "Founder",
+    roleType: "founder",
+    image: "",
+    email: "founder@example.com",
+    bio: "Demo founder profile — replace with the real founder's name, story, links, and photo.",
+  },
+  {
+    id: "demo-founder-2",
+    name: "Co-Founder Name",
+    role: "Co-Founder",
+    roleType: "founder",
+    image: "",
+    email: "cofounder@example.com",
+    bio: "Demo co-founder profile — replace with the real co-founder's name, story, links, and photo.",
+  },
 ];
 
 // Backwards-compatible alias for any existing imports that still use teamMembers.
