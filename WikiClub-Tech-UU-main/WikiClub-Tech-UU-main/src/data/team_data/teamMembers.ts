@@ -381,7 +381,21 @@ export const previousTeamMembers: TeamMember[] = [
  * Add the new/current roster here as it is finalized.
  * The Teams page intentionally renders this list first.
  */
-export const currentTeamMembers: TeamMember[] = [];
+export const currentTeamMembers: TeamMember[] = [
+  // Add the new/current team members here.
+  // Example:
+  // {
+  //   id: "current-1",
+  //   name: "Member Name",
+  //   role: "Team Lead",
+  //   roleType: "lead",
+  //   image: "/team/member-image.jpg",
+  //   email: "member@example.com",
+  //   linkedin: "https://www.linkedin.com/in/username/",
+  //   github: "https://github.com/username",
+  //   bio: "Short member bio.",
+  // },
+];
 
 // Backwards-compatible alias for any existing imports that still use teamMembers.
 export const teamMembers = previousTeamMembers;
