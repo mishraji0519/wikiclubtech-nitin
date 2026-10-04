@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { ComponentType } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
 import { Mail, Linkedin, Github } from 'lucide-react';
 import Image from 'next/image';
 
@@ -139,7 +139,7 @@ const TeamMemberCard = ({
                 <div className='flex flex-col sm:flex-row'>
                   <div className='relative h-64 shrink-0 bg-slate-200 sm:h-auto sm:w-2/5'>
                     {image ? (
-                      <Image src={assetPath(image)} alt={name} fill unoptimized sizes='40vw' className='object-cover' />
+                      <Image src={assetPath(image)} alt={name} fill unoptimized sizes='40vw' className='object-cover transition-transform duration-700 ease-out group-hover:scale-105' />
                     ) : (
                       <div className='flex h-full min-h-64 items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'>
                         <span className='text-7xl font-black text-white/80'>{name.charAt(0)}</span>
@@ -172,7 +172,7 @@ const TeamMemberCard = ({
       >
         <div className='relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-slate-200 to-slate-500'>
           {image ? (
-            <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 768px) 100vw, 33vw' className='object-cover' />
+            <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 768px) 100vw, 33vw' className='object-cover transition-transform duration-700 ease-out group-hover:scale-105' />
           ) : (
             <div className='flex h-full items-center justify-center'>
               <span className='text-6xl font-black text-white/80'>{name.charAt(0).toUpperCase()}</span>
