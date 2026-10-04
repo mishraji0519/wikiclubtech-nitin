@@ -12,6 +12,7 @@ import {
 } from '@/data/team_data/teamMembers';
 import { Button } from '@/components/ui/button';
 import WikimediaBackground from '@/components/team/WikimediaBackground';
+import CursorGlow from '@/components/team/CursorGlow';
 import Image from 'next/image';
 
 type RoleFilter = 'coordinator' | 'mentor' | 'envoy' | 'lead' | 'volunteer';
@@ -81,7 +82,7 @@ const TeamSections = ({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className='mb-10 text-center'
             >
               <p className='mb-2 text-xs font-bold uppercase tracking-[0.24em] text-primary'>
@@ -145,7 +146,7 @@ const RoleNavigation = ({
             <Button
               onClick={() => onNavigate(`${idPrefix}-${role}`)}
               variant={activeSection === role ? 'default' : 'outline'}
-              className={`rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 ${
+              whileHover={{ y: -2, scale: activeSection === role ? 1.05 : 1.03 }}\n              whileTap={{ scale: 0.96 }}\n              className={`rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 ${
                 activeSection === role
                   ? 'scale-105 border-0 bg-gradient-to-r from-blue-400 to-cyan-500 text-white shadow-xl'
                   : 'bg-white hover:scale-105 hover:text-primary'
