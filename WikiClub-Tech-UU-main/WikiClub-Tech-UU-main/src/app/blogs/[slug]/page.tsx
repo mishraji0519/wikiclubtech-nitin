@@ -216,3 +216,13 @@ const BlogPostPage = async ({ params }: BlogPostPageProps) => {
 };
 
 export default BlogPostPage;
+
+
+// Pre-render Markdown blog posts for GitHub Pages static export.
+export async function generateStaticParams() {
+  const blogsDirectory = path.join(process.cwd(), 'src/data/blogs');
+  return fs
+    .readdirSync(blogsDirectory)
+    .filter((filename) => filename.endsWith('.md'))
+    .map((filename) => ({ slug: filename.replace(/\.md$/, '') }));
+}
