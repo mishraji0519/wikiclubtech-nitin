@@ -157,8 +157,6 @@ const RoleNavigation = ({
             <Button
               onClick={() => onNavigate(`${idPrefix}-${role}`)}
               variant={activeSection === role ? 'default' : 'outline'}
-              whileHover={{ y: -2, scale: activeSection === role ? 1.05 : 1.03 }}
-              whileTap={{ scale: 0.96 }}
               className={`rounded-full px-6 py-3 text-sm font-bold transition-all duration-300 ${
                 activeSection === role
                   ? 'scale-105 border-0 bg-gradient-to-r from-blue-400 to-cyan-500 text-white shadow-xl'
