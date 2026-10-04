@@ -55,7 +55,9 @@ const TeamMemberCard = ({
   demo = false,
 }: TeamMemberCardProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const isFeatureCard = roleType === 'founder' || roleType === 'coordinator';
+  const isFeatureCard =
+    roleType === 'founder' || roleType === 'coordinator' || roleType === 'mentor';
+  const isCompactCard = roleType === 'volunteer';
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
   const rotateX = useSpring(tiltX, { stiffness: 260, damping: 24, mass: 0.25 });
@@ -193,26 +195,32 @@ const TeamMemberCard = ({
         style={{ rotateX, rotateY, transformPerspective: 900 }}
         onPointerMove={handlePointerMove}
         onPointerLeave={resetTilt}
-        className='group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-[0_10px_35px_rgba(15,23,42,0.08)] ring-1 ring-black/5'
+        className={`group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-[0_10px_35px_rgba(15,23,42,0.08)] ring-1 ring-black/5 ${
+          isCompactCard ? 'rounded-xl' : ''
+        }`}
         onClick={() => setModalOpen(true)}
       >
-        <div className='relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-slate-200 to-slate-500'>
+        <div
+          className={`relative overflow-hidden bg-gradient-to-br from-slate-200 to-slate-500 ${
+            isCompactCard ? 'aspect-[5/4]' : 'aspect-[4/3]'
+          }`}
+        >
           {image ? (
-            <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 768px) 100vw, 33vw' className='object-cover transition-transform duration-700 ease-out group-hover:scale-105' />
+            <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 768px) 100vw, 20vw' className='object-cover transition-transform duration-700 ease-out group-hover:scale-105' />
           ) : (
             <div className='flex h-full items-center justify-center'>
               <span className='text-6xl font-black text-white/80'>{name.charAt(0).toUpperCase()}</span>
             </div>
           )}
         </div>
-        <div className='p-5'>
+        <div className={isCompactCard ? 'p-3' : 'p-5'}>
           <div className='flex flex-wrap items-center gap-2'>
             <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700'>{role}</span>
             {demo && <span className='rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800'>Demo</span>}
           </div>
-          <h3 className='mt-3 text-xl font-black text-slate-900'>{name}</h3>
-          {bio && <p className='mt-2 line-clamp-2 text-sm leading-6 text-slate-600'>{bio}</p>}
-          <div className='mt-4 border-t border-slate-200 pt-4'>{socialLinks}</div>
+          <h3 className={isCompactCard ? 'mt-2 text-base font-black text-slate-900' : 'mt-3 text-xl font-black text-slate-900'}>{name}</h3>
+          {bio && <p className={isCompactCard ? 'mt-1 line-clamp-2 text-xs leading-5 text-slate-600' : 'mt-2 line-clamp-2 text-sm leading-6 text-slate-600'}>{bio}</p>}
+          <div className={isCompactCard ? 'mt-3 border-t border-slate-200 pt-3' : 'mt-4 border-t border-slate-200 pt-4'}>{socialLinks}</div>
         </div>
       </motion.article>
 
