@@ -15,10 +15,9 @@ import WikimediaBackground from '@/components/team/WikimediaBackground';
 import CursorGlow from '@/components/team/CursorGlow';
 import Image from 'next/image';
 
-type RoleFilter = 'coordinator' | 'mentor' | 'envoy' | 'lead' | 'volunteer';
+type RoleFilter = 'mentor' | 'envoy' | 'lead' | 'volunteer';
 
 const roleLabels: Record<RoleFilter, string> = {
-  coordinator: 'Project Coordinators',
   mentor: 'Mentors',
   envoy: 'Campus Envoys',
   lead: 'Team Leads',
@@ -26,9 +25,8 @@ const roleLabels: Record<RoleFilter, string> = {
 };
 
 const sectionOrder: RoleFilter[] = [
-  'coordinator',
-  'mentor',
   'envoy',
+  'mentor',
   'lead',
   'volunteer',
 ];
@@ -49,7 +47,6 @@ const groupMembersByRole = (
       return acc;
     },
     {
-      coordinator: [],
       mentor: [],
       envoy: [],
       lead: [],
@@ -72,6 +69,15 @@ const TeamSections = ({
         const roleMembers = membersByRole[role];
         if (!roleMembers?.length) return null;
 
+        const gridClass =
+          role === 'mentor'
+            ? 'mx-auto max-w-5xl space-y-6'
+            : role === 'envoy'
+              ? 'mx-auto grid max-w-6xl grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3'
+              : role === 'volunteer'
+                ? 'mx-auto grid max-w-7xl grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5'
+                : 'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3';
+
         return (
           <section
             key={`${idPrefix}-${role}`}
@@ -91,13 +97,7 @@ const TeamSections = ({
               <h2 className='text-3xl font-bold md:text-4xl'>{roleLabels[role]}</h2>
             </motion.div>
 
-            <motion.div
-              className={
-                role === 'coordinator'
-                  ? 'mx-auto max-w-5xl space-y-6'
-                  : 'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'
-              }
-            >
+            <motion.div className={gridClass}>
               {roleMembers.map((member, index) => (
                 <motion.div
                   key={member.id}
@@ -109,6 +109,7 @@ const TeamSections = ({
                     delay: Math.min(index * 0.08, 0.32),
                     ease: [0.22, 1, 0.36, 1],
                   }}
+                  className={role === 'envoy' ? 'w-full max-w-sm' : 'w-full'}
                 >
                   <TeamMemberCard
                     {...member}
@@ -172,37 +173,60 @@ const RoleNavigation = ({
   );
 };
 
-const FoundersSection = () => (
-  <section aria-labelledby='founders-heading' className='mb-28'>
-    <div className='mx-auto mb-10 max-w-3xl text-center'>
-      <div className='mb-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200'>
-        <Crown className='h-4 w-4' />
-        The Beginning
-      </div>
-      <h2 id='founders-heading' className='text-4xl font-black tracking-tight md:text-5xl'>
-        Our Founders
-      </h2>
-      <p className='mt-4 text-muted-foreground'>
-        The people who started the journey and helped shape the vision of WikiClub Tech.
-      </p>
-    </div>
+const FoundersSection = () => {
+  const projectCoordinator = previousTeamMembers.find(
+    (member) => member.roleType === 'coordinator'
+  );
 
-    <div className='mx-auto max-w-5xl space-y-6'>
-      {founderDemoMembers.map((member) => (
-        <TeamMemberCard key={member.id} {...member} demo />
-      ))}
-    </div>
-  </section>
-);
+  return (
+    <section aria-labelledby='founders-heading' className='mb-28'>
+      <div className='mx-auto mb-10 max-w-3xl text-center'>
+        <div className='mb-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200'>
+          <Crown className='h-4 w-4' />
+          The Beginning
+        </div>
+        <h2 id='founders-heading' className='text-4xl font-black tracking-tight md:text-5xl'>
+          Our Founders
+        </h2>
+        <p className='mt-4 text-muted-foreground'>
+          The people who started the journey and helped shape the vision of Wikiclubtech-UU.
+        </p>
+      </div>
+
+      <div className='mx-auto max-w-5xl space-y-6'>
+        {founderDemoMembers.map((member) => (
+          <TeamMemberCard key={member.id} {...member} demo />
+        ))}
+      </div>
+
+      {projectCoordinator && (
+        <>
+          <div className='mx-auto my-12 max-w-4xl text-center'>
+            <h3 className='text-2xl font-black tracking-tight text-slate-900 md:text-3xl'>
+              Wikiclub Tech India (Part of OKI-IIITH)
+            </h3>
+          </div>
+          <div className='mx-auto max-w-5xl'>
+            <TeamMemberCard {...projectCoordinator} />
+          </div>
+        </>
+      )}
+    </section>
+  );
+};
 
 const Index = () => {
   const [showPreviousTeam, setShowPreviousTeam] = useState(false);
-  const displayedCurrentMembers =
-    currentTeamMembers.length > 0 ? currentTeamMembers : currentTeamDemoMembers;
+  const displayedCurrentMembers = (
+    currentTeamMembers.length > 0 ? currentTeamMembers : currentTeamDemoMembers
+  ).filter((member) => member.roleType !== 'coordinator');
+  const displayedPreviousMembers = previousTeamMembers.filter(
+    (member) => member.roleType !== 'coordinator'
+  );
 
-  const [activeSection, setActiveSection] = useState<RoleFilter>('coordinator');
+  const [activeSection, setActiveSection] = useState<RoleFilter>('envoy');
   const [activePreviousSection, setActivePreviousSection] =
-    useState<RoleFilter>('coordinator');
+    useState<RoleFilter>('envoy');
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -325,14 +349,14 @@ const Index = () => {
             </motion.div>
 
             <p className='mb-4 text-sm font-bold uppercase tracking-[0.28em] text-black/70'>
-              WikiClub Tech • 2026–27
+              Wikiclubtech-UU • 2026–27
             </p>
             <h1 className='mb-6 text-5xl font-black tracking-tight text-black drop-shadow-lg md:text-7xl'>
               Our Mission, Our People
             </h1>
             <p className='mx-auto max-w-3xl text-xl font-medium text-black/95 drop-shadow md:text-2xl'>
               More than a team page — discover the people, story, and community
-              behind WikiClub Tech.
+              behind Wikiclubtech-UU.
             </p>
           </motion.div>
         </div>
@@ -348,7 +372,7 @@ const Index = () => {
               Current Team • 2026–27
             </div>
             <h2 id='current-team-heading' className='text-4xl font-black tracking-tight md:text-5xl'>
-              The Team Behind WikiClub
+              The Team Behind Wikiclubtech-UU
             </h2>
             <p className='mt-4 text-muted-foreground'>
               Every role below currently shows a demo profile until the real
@@ -375,10 +399,10 @@ const Index = () => {
               Team Archive
             </div>
             <h2 id='previous-team-heading' className='text-3xl font-black tracking-tight md:text-4xl'>
-              Previous Team
+              Wikiclubtech-UU 2025-26
             </h2>
             <p className='mt-4 text-muted-foreground'>
-              Explore the people who contributed to WikiClub before the current team.
+              Explore the people who contributed to Wikiclubtech-UU before the current team.
             </p>
 
             <Button
@@ -390,12 +414,12 @@ const Index = () => {
             >
               {showPreviousTeam ? (
                 <>
-                  Hide Previous Team
+                  Hide Wikiclubtech-UU 2025-26
                   <ArrowUp className='ml-2 h-4 w-4' />
                 </>
               ) : (
                 <>
-                  View Previous Team
+                  View Wikiclubtech-UU 2025-26
                   <ArrowDown className='ml-2 h-4 w-4' />
                 </>
               )}
@@ -413,12 +437,12 @@ const Index = () => {
                 className='mt-16 overflow-hidden'
               >
                 <RoleNavigation
-                  members={previousTeamMembers}
+                  members={displayedPreviousMembers}
                   activeSection={activePreviousSection}
                   onNavigate={scrollToSection}
                   idPrefix='previous'
                 />
-                <TeamSections members={previousTeamMembers} idPrefix='previous' />
+                <TeamSections members={displayedPreviousMembers} idPrefix='previous' />
               </motion.div>
             )}
           </AnimatePresence>
