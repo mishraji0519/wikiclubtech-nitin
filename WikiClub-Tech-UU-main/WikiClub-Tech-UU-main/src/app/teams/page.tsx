@@ -98,12 +98,23 @@ const TeamSections = ({
                   : 'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3'
               }
             >
-              {roleMembers.map((member) => (
-                <TeamMemberCard
+              {roleMembers.map((member, index) => (
+                <motion.div
                   key={member.id}
-                  {...member}
-                  demo={member.id.startsWith('demo-')}
-                />
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{
+                    duration: 0.5,
+                    delay: Math.min(index * 0.08, 0.32),
+                    ease: [0.22, 1, 0.36, 1],
+                  }}
+                >
+                  <TeamMemberCard
+                    {...member}
+                    demo={member.id.startsWith('demo-')}
+                  />
+                </motion.div>
               ))}
             </motion.div>
           </section>
@@ -274,6 +285,7 @@ const Index = () => {
 
   return (
     <div className='min-h-screen bg-background'>
+      <CursorGlow />
       <header className='relative overflow-hidden px-6 py-24 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]'>
         <div className='absolute inset-0 bg-gradient-to-br from-blue-100 via-green-100 to-red-100' />
         <WikimediaBackground />
