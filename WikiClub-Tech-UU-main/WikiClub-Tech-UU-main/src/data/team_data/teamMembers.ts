@@ -10,7 +10,7 @@ export interface TeamMember {
   bio?: string;
 }
 
-export const teamMembers: TeamMember[] = [
+export const previousTeamMembers: TeamMember[] = [
   {
     id: "1",
     name: "Hemant Ojha",
@@ -96,7 +96,7 @@ export const teamMembers: TeamMember[] = [
     roleType: "volunteer",
     image: "/team/Sanya Gupta.jpg",
     email: "sanyag788@gmail.com",
-    linkedin: "https://www.linkedin.com/in/sanyagupta788 ",
+    linkedin: "https://www.linkedin.com/in/sanyagupta788",
     github: "https://github.com/Sanya-gg",
     bio: "",
   },
@@ -196,7 +196,7 @@ export const teamMembers: TeamMember[] = [
     image: "/team/Sanskar Dubey.jpg",
     email: "sanskardubeydev@gmail.com",
     linkedin: "https://www.linkedin.com/in/sanskardev/",
-    github: "Dubeysanskar",
+    github: "https://github.com/Dubeysanskar",
     bio: "",
   },
   {
@@ -217,7 +217,7 @@ export const teamMembers: TeamMember[] = [
     roleType: "volunteer",
     image: "/team/Ayush WikiClubTech-UU.jpg",
     email: "ayush.wikiclubtech@gmail.com",
-    linkedin: "https://www.linkedin.com/in/ayush-tiwari-9601a7348 ",
+    linkedin: "https://www.linkedin.com/in/ayush-tiwari-9601a7348",
     github: "https://github.com/ayush26011",
     bio: "",
   },
@@ -244,7 +244,7 @@ export const teamMembers: TeamMember[] = [
     bio: "Founder of GDG prayagraj, Project Coordinator of Wiki@IIIT Hyderabad, and a passionate tech enthusiast. With a strong background in software development and community building, Ankit has been instrumental in fostering a collaborative environment for tech enthusiasts at IIIT Hyderabad. His dedication to promoting open-source technologies and empowering the next generation of developers has made him a key figure in the tech community. Ankit's vision is to create a thriving ecosystem where knowledge sharing and innovation go hand in hand, driving positive change in the world of technology.",
   },
   {
-    id: "20",
+    id: "32",
     name: "Shami Verma",
     role: "Volunteer",
     roleType: "volunteer",
@@ -255,7 +255,7 @@ export const teamMembers: TeamMember[] = [
     bio: ""
   },
   {
-    id: "21",
+    id: "33",
     name: "Syed Sohrab Haider Rizvi",
     role: "Volunteer",
     roleType: "volunteer",
@@ -371,8 +371,17 @@ export const teamMembers: TeamMember[] = [
     roleType: "volunteer",
     image: "/team/Mahin Farooqui.jpeg",
     email: "farooquimahin30@gmail.com",
-    linkedin: "www.linkedin.com/in/mahin-farooquiii",
+    linkedin: "https://www.linkedin.com/in/mahin-farooquiii",
     github: "https://github.com/farooquimahin",
     bio: ""
   }
 ];
+
+/**
+ * Add the new/current roster here as it is finalized.
+ * The Teams page intentionally renders this list first.
+ */
+export const currentTeamMembers: TeamMember[] = [];
+
+// Backwards-compatible alias for any existing imports that still use teamMembers.
+export const teamMembers = previousTeamMembers;
