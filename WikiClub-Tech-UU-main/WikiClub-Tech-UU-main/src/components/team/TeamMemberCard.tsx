@@ -56,6 +56,24 @@ const TeamMemberCard = ({
 }: TeamMemberCardProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const isFeatureCard = roleType === 'founder' || roleType === 'coordinator';
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const rotateX = useSpring(tiltX, { stiffness: 260, damping: 24, mass: 0.25 });
+  const rotateY = useSpring(tiltY, { stiffness: 260, damping: 24, mass: 0.25 });
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLElement>) => {
+    if (event.pointerType !== 'mouse') return;
+    const rect = event.currentTarget.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+    tiltY.set(x * 5);
+    tiltX.set(y * -5);
+  };
+
+  const resetTilt = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+  };
 
   const socialLinks = (
     <div className='flex flex-wrap gap-2'>
@@ -74,7 +92,7 @@ const TeamMemberCard = ({
           fill
           unoptimized
           sizes='(max-width: 640px) 100vw, 40vw'
-          className='object-cover'
+          className='object-cover transition-transform duration-700 ease-out group-hover:scale-105'
         />
       ) : (
         <div className='flex h-full w-full items-center justify-center'>
@@ -91,8 +109,12 @@ const TeamMemberCard = ({
       <>
         <motion.article
           layoutId={`card-${name}`}
-          whileHover={{ y: -4 }}
+          whileHover={{ y: -6, scale: 1.008 }}
+          whileTap={{ scale: 0.995 }}
           transition={{ type: 'spring', stiffness: 280, damping: 22 }}
+          style={{ rotateX, rotateY, transformPerspective: 900 }}
+          onPointerMove={handlePointerMove}
+          onPointerLeave={resetTilt}
           className='group cursor-pointer overflow-hidden rounded-3xl bg-white shadow-[0_12px_45px_rgba(15,23,42,0.10)] ring-1 ring-black/5'
           onClick={() => setModalOpen(true)}
         >
@@ -165,9 +187,13 @@ const TeamMemberCard = ({
     <>
       <motion.article
         layoutId={`card-${name}`}
-        whileHover={{ y: -5 }}
+        whileHover={{ y: -7, scale: 1.012 }}
+        whileTap={{ scale: 0.992 }}
         transition={{ type: 'spring', stiffness: 280, damping: 22 }}
-        className='cursor-pointer overflow-hidden rounded-2xl bg-white shadow-[0_10px_35px_rgba(15,23,42,0.08)] ring-1 ring-black/5'
+        style={{ rotateX, rotateY, transformPerspective: 900 }}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={resetTilt}
+        className='group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-[0_10px_35px_rgba(15,23,42,0.08)] ring-1 ring-black/5'
         onClick={() => setModalOpen(true)}
       >
         <div className='relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-slate-200 to-slate-500'>
