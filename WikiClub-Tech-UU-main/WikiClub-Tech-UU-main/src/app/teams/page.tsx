@@ -189,7 +189,7 @@ const FoundersSection = () => {
           Our Founders
         </h2>
         <p className='mt-4 text-muted-foreground'>
-          The people who started the journey and helped shape the vision of Wikiclubtech-UU.
+          The people who started the journey and helped shape the vision of Wikiclub Tech-UU.
         </p>
       </div>
 
@@ -349,14 +349,14 @@ const Index = () => {
             </motion.div>
 
             <p className='mb-4 text-sm font-bold uppercase tracking-[0.28em] text-black/70'>
-              Wikiclubtech-UU • 2026–27
+              Wikiclub Tech-UU • 2026–27
             </p>
             <h1 className='mb-6 text-5xl font-black tracking-tight text-black drop-shadow-lg md:text-7xl'>
               Our Mission, Our People
             </h1>
             <p className='mx-auto max-w-3xl text-xl font-medium text-black/95 drop-shadow md:text-2xl'>
               More than a team page — discover the people, story, and community
-              behind Wikiclubtech-UU.
+              behind Wikiclub Tech-UU.
             </p>
           </motion.div>
         </div>
@@ -372,7 +372,7 @@ const Index = () => {
               Current Team • 2026–27
             </div>
             <h2 id='current-team-heading' className='text-4xl font-black tracking-tight md:text-5xl'>
-              The Team Behind Wikiclubtech-UU
+              The Team Behind Wikiclub Tech-UU
             </h2>
             <p className='mt-4 text-muted-foreground'>
               Every role below currently shows a demo profile until the real
@@ -399,10 +399,10 @@ const Index = () => {
               Team Archive
             </div>
             <h2 id='previous-team-heading' className='text-3xl font-black tracking-tight md:text-4xl'>
-              Wikiclubtech-UU 2025-26
+              Wikiclub Tech-UU 2025-26
             </h2>
             <p className='mt-4 text-muted-foreground'>
-              Explore the people who contributed to Wikiclubtech-UU before the current team.
+              Explore the people who contributed to Wikiclub Tech-UU before the current team.
             </p>
 
             <Button
@@ -414,12 +414,12 @@ const Index = () => {
             >
               {showPreviousTeam ? (
                 <>
-                  Hide Wikiclubtech-UU 2025-26
+                  Hide Wikiclub Tech-UU 2025-26
                   <ArrowUp className='ml-2 h-4 w-4' />
                 </>
               ) : (
                 <>
-                  View Wikiclubtech-UU 2025-26
+                  View Wikiclub Tech-UU 2025-26
                   <ArrowDown className='ml-2 h-4 w-4' />
                 </>
               )}
