@@ -24,12 +24,7 @@ const roleLabels: Record<RoleFilter, string> = {
   volunteer: 'Volunteers',
 };
 
-const sectionOrder: RoleFilter[] = [
-  'envoy',
-  'mentor',
-  'lead',
-  'volunteer',
-];
+const sectionOrder: RoleFilter[] = ['envoy', 'mentor', 'lead', 'volunteer'];
 
 const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '/wikiclubtech-nitin';
 const assetPath = (src: string) =>
@@ -46,12 +41,10 @@ const groupMembersByRole = (
       if (role in acc) acc[role].push(member);
       return acc;
     },
-    {
-      mentor: [],
-      envoy: [],
-      lead: [],
-      volunteer: [],
-    } as Record<RoleFilter, typeof currentTeamDemoMembers>
+    { mentor: [], envoy: [], lead: [], volunteer: [] } as Record<
+      RoleFilter,
+      typeof currentTeamDemoMembers
+    >
   );
 
 const TeamSections = ({
@@ -79,11 +72,7 @@ const TeamSections = ({
                 : 'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3';
 
         return (
-          <section
-            key={`${idPrefix}-${role}`}
-            id={`${idPrefix}-${role}`}
-            className='scroll-mt-32'
-          >
+          <section key={`${idPrefix}-${role}`} id={`${idPrefix}-${role}`} className='scroll-mt-32'>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -111,10 +100,7 @@ const TeamSections = ({
                   }}
                   className={role === 'envoy' ? 'w-full max-w-sm' : 'w-full'}
                 >
-                  <TeamMemberCard
-                    {...member}
-                    demo={member.id.startsWith('demo-')}
-                  />
+                  <TeamMemberCard {...member} demo={member.id.startsWith('demo-')} />
                 </motion.div>
               ))}
             </motion.div>
@@ -225,17 +211,14 @@ const Index = () => {
   );
 
   const [activeSection, setActiveSection] = useState<RoleFilter>('envoy');
-  const [activePreviousSection, setActivePreviousSection] =
-    useState<RoleFilter>('envoy');
+  const [activePreviousSection, setActivePreviousSection] = useState<RoleFilter>('envoy');
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (!element) return;
 
     const headerOffset = 120;
-    const offsetPosition =
-      element.getBoundingClientRect().top + window.scrollY - headerOffset;
-
+    const offsetPosition = element.getBoundingClientRect().top + window.scrollY - headerOffset;
     window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
   };
 
@@ -243,7 +226,6 @@ const Index = () => {
     const sections = sectionOrder
       .map((role) => document.getElementById(`current-${role}`))
       .filter((section): section is HTMLElement => Boolean(section));
-
     if (!sections.length) return;
 
     const observer = new IntersectionObserver(
@@ -251,11 +233,8 @@ const Index = () => {
         const visibleSection = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
         if (visibleSection) {
-          setActiveSection(
-            visibleSection.target.id.replace('current-', '') as RoleFilter
-          );
+          setActiveSection(visibleSection.target.id.replace('current-', '') as RoleFilter);
         }
       },
       { rootMargin: '-140px 0px -55% 0px', threshold: [0.1, 0.25, 0.5] }
@@ -271,7 +250,6 @@ const Index = () => {
     const sections = sectionOrder
       .map((role) => document.getElementById(`previous-${role}`))
       .filter((section): section is HTMLElement => Boolean(section));
-
     if (!sections.length) return;
 
     const observer = new IntersectionObserver(
@@ -279,11 +257,8 @@ const Index = () => {
         const visibleSection = entries
           .filter((entry) => entry.isIntersecting)
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-
         if (visibleSection) {
-          setActivePreviousSection(
-            visibleSection.target.id.replace('previous-', '') as RoleFilter
-          );
+          setActivePreviousSection(visibleSection.target.id.replace('previous-', '') as RoleFilter);
         }
       },
       { rootMargin: '-140px 0px -55% 0px', threshold: [0.1, 0.25, 0.5] }
@@ -299,10 +274,7 @@ const Index = () => {
 
     if (next) {
       window.setTimeout(() => {
-        document.getElementById('previous-team')?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start',
-        });
+        document.getElementById('previous-team')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 80);
     }
   };
@@ -312,6 +284,18 @@ const Index = () => {
       <CursorGlow />
       <header className='relative overflow-hidden bg-[#fbfdfc] px-6 py-24 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]'>
         <WikimediaBackground />
+
+        {/* Soft neutral grid: no coloured grid lines, just the light reference-style pattern. */}
+        <div
+          aria-hidden='true'
+          className='pointer-events-none absolute inset-0 z-[1] opacity-90'
+          style={{
+            backgroundImage:
+              'linear-gradient(rgba(100, 116, 139, 0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(100, 116, 139, 0.12) 1px, transparent 1px)',
+            backgroundSize: '52px 52px',
+            backgroundPosition: 'center center',
+          }}
+        />
 
         <div className='container relative z-10 mx-auto max-w-6xl'>
           <motion.div
@@ -339,10 +323,7 @@ const Index = () => {
                   className='absolute h-20 w-20 object-contain'
                   animate={{ rotate: 360 }}
                   transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-                  style={{
-                    maskImage:
-                      'radial-gradient(circle, transparent 60%, black 61%)',
-                  }}
+                  style={{ maskImage: 'radial-gradient(circle, transparent 60%, black 61%)' }}
                 />
               </div>
             </motion.div>
@@ -354,8 +335,7 @@ const Index = () => {
               Our Mission, Our People
             </h1>
             <p className='mx-auto max-w-3xl text-xl font-medium text-black/95 drop-shadow md:text-2xl'>
-              More than a team page — discover the people, story, and community
-              behind Wikiclub Tech-UU.
+              More than a team page — discover the people, story, and community behind Wikiclub Tech-UU.
             </p>
           </motion.div>
         </div>
@@ -374,24 +354,15 @@ const Index = () => {
               The Team Behind Wikiclub Tech-UU
             </h2>
             <p className='mt-4 text-muted-foreground'>
-              Every role below currently shows a demo profile until the real
-              2026–27 roster is supplied.
+              Every role below currently shows a demo profile until the real 2026–27 roster is supplied.
             </p>
           </div>
 
-          <RoleNavigation
-            members={displayedCurrentMembers}
-            activeSection={activeSection}
-            onNavigate={scrollToSection}
-            idPrefix='current'
-          />
+          <RoleNavigation members={displayedCurrentMembers} activeSection={activeSection} onNavigate={scrollToSection} idPrefix='current' />
           <TeamSections members={displayedCurrentMembers} idPrefix='current' />
         </section>
 
-        <section
-          aria-labelledby='previous-team-heading'
-          className='mt-28 border-t border-border/60 pt-20'
-        >
+        <section aria-labelledby='previous-team-heading' className='mt-28 border-t border-border/60 pt-20'>
           <div className='mx-auto max-w-3xl text-center'>
             <div className='mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-muted/40 px-4 py-2 text-sm font-bold text-muted-foreground'>
               <Archive className='h-4 w-4' />
@@ -435,12 +406,7 @@ const Index = () => {
                 transition={{ duration: 0.45, ease: 'easeInOut' }}
                 className='mt-16 overflow-hidden'
               >
-                <RoleNavigation
-                  members={displayedPreviousMembers}
-                  activeSection={activePreviousSection}
-                  onNavigate={scrollToSection}
-                  idPrefix='previous'
-                />
+                <RoleNavigation members={displayedPreviousMembers} activeSection={activePreviousSection} onNavigate={scrollToSection} idPrefix='previous' />
                 <TeamSections members={displayedPreviousMembers} idPrefix='previous' />
               </motion.div>
             )}
