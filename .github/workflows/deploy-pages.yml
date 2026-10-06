@@ -13,7 +13,11 @@ permissions:
 
 concurrency:
   group: github-pages
-  cancel-in-progress: false
+  cancel-in-progress: true
+
+env:
+  NEXT_PUBLIC_BASE_PATH: /wikiclubtech-nitin
+  NEXT_TELEMETRY_DISABLED: 1
 
 jobs:
   build:
@@ -21,6 +25,7 @@ jobs:
     defaults:
       run:
         working-directory: WikiClub-Tech-UU-main/WikiClub-Tech-UU-main
+
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -32,8 +37,7 @@ jobs:
           cache: npm
           cache-dependency-path: WikiClub-Tech-UU-main/WikiClub-Tech-UU-main/package-lock.json
 
-      - name: Setup GitHub Pages
-        id: pages
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
       - name: Install dependencies
@@ -41,6 +45,12 @@ jobs:
 
       - name: Build static site
         run: npm run build
+
+      - name: Verify static export
+        run: |
+          test -f out/index.html
+          test -f out/teams/index.html
+          echo "Static export verified: homepage and Teams page are present."
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
@@ -53,6 +63,7 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
