@@ -4,13 +4,16 @@ const WikimediaBackground = () => {
   return (
     <>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Soft pastel gradient background — kept behind the neutral grid. */}
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              'radial-gradient(circle at 15% 10%, rgba(210, 238, 250, 0.75) 0%, rgba(210, 238, 250, 0) 42%), radial-gradient(circle at 85% 10%, rgba(215, 250, 225, 0.8) 0%, rgba(215, 250, 225, 0) 45%), radial-gradient(circle at 80% 90%, rgba(255, 245, 235, 0.65) 0%, rgba(255, 245, 235, 0) 40%), #f8fcfa',
-          }}
+        {/* Original animated gradient background */}
+        <motion.div
+          className="absolute top-1/3 right-1/4 w-72 h-72 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl"
+          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+        />
+        <motion.div
+          className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-gradient-to-br from-secondary/20 to-transparent rounded-full blur-3xl"
+          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
+          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
         />
 
         {/* Orbiting Circles */}
@@ -37,18 +40,6 @@ const WikimediaBackground = () => {
             />
           </div>
         </motion.div>
-
-        {/* Gradient Orbs */}
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-72 h-72 bg-gradient-to-br from-primary/20 to-transparent rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-gradient-to-br from-secondary/20 to-transparent rounded-full blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.5, 0.3, 0.5] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
       </div>
 
       <style>{`
