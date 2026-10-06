@@ -310,8 +310,7 @@ const Index = () => {
   return (
     <div className='min-h-screen bg-background'>
       <CursorGlow />
-      <header className='relative overflow-hidden px-6 py-24 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]'>
-        <div className='absolute inset-0 bg-gradient-to-br from-blue-100 via-green-100 to-red-100' />
+      <header className='relative overflow-hidden bg-[#fbfdfc] px-6 py-24 [mask-image:linear-gradient(to_bottom,black_75%,transparent)]'>
         <WikimediaBackground />
 
         <div className='container relative z-10 mx-auto max-w-6xl'>
