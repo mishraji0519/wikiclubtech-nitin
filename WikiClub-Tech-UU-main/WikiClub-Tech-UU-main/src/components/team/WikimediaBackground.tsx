@@ -4,28 +4,16 @@ const WikimediaBackground = () => {
   return (
     <>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Visible hero gradient — kept underneath the neutral reference grid. */}
+        {/* Original Teams hero background: soft blue, green, cyan and warm peach glow. */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              'radial-gradient(circle at 18% 18%, rgba(191, 219, 254, 0.62) 0%, rgba(191, 219, 254, 0) 42%), radial-gradient(circle at 82% 20%, rgba(221, 214, 254, 0.58) 0%, rgba(221, 214, 254, 0) 44%), radial-gradient(circle at 72% 82%, rgba(186, 230, 253, 0.42) 0%, rgba(186, 230, 253, 0) 42%), #fbfdfc',
+              'radial-gradient(circle at 8% 0%, rgba(190, 222, 255, 0.78) 0%, rgba(190, 222, 255, 0) 42%), radial-gradient(circle at 92% 0%, rgba(210, 248, 220, 0.82) 0%, rgba(210, 248, 220, 0) 44%), radial-gradient(circle at 50% 32%, rgba(211, 246, 239, 0.58) 0%, rgba(211, 246, 239, 0) 46%), radial-gradient(circle at 94% 92%, rgba(255, 237, 224, 0.72) 0%, rgba(255, 237, 224, 0) 38%), linear-gradient(180deg, #eef8ff 0%, #effcf7 48%, #fffdfa 100%)',
           }}
         />
 
-        {/* Original animated gradient orbs */}
-        <motion.div
-          className="absolute top-1/3 right-1/4 w-72 h-72 bg-gradient-to-br from-blue-400/25 to-transparent rounded-full blur-3xl"
-          animate={{ scale: [1, 1.2, 1], opacity: [0.35, 0.55, 0.35] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-        <motion.div
-          className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-gradient-to-br from-violet-400/25 to-transparent rounded-full blur-3xl"
-          animate={{ scale: [1.2, 1, 1.2], opacity: [0.55, 0.35, 0.55] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
-        />
-
-        {/* Orbiting Circles */}
+        {/* Wikimedia-style orbiting dots from the original hero. */}
         <motion.div
           className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
           animate={{ rotate: 360 }}
