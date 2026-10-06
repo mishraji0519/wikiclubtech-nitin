@@ -86,7 +86,7 @@ const TeamMemberCard = ({
   );
 
   const imageBlock = (
-    <div className='relative h-56 w-full shrink-0 overflow-hidden bg-gradient-to-br from-slate-200 via-slate-300 to-slate-500 sm:h-64 sm:w-2/5'>
+    <div className='relative min-h-56 w-full shrink-0 self-stretch overflow-hidden bg-gradient-to-br from-slate-200 via-slate-300 to-slate-500 sm:min-h-64 sm:w-2/5'>
       {image ? (
         <Image
           src={assetPath(image)}
@@ -94,7 +94,7 @@ const TeamMemberCard = ({
           fill
           unoptimized
           sizes='(max-width: 640px) 100vw, 40vw'
-          className='object-cover transition-transform duration-700 ease-out group-hover:scale-105'
+          className='object-cover object-[center_28%] transition-transform duration-700 ease-out group-hover:scale-105'
         />
       ) : (
         <div className='flex h-full w-full items-center justify-center'>
@@ -120,7 +120,7 @@ const TeamMemberCard = ({
           className='group cursor-pointer overflow-hidden rounded-3xl bg-white shadow-[0_12px_45px_rgba(15,23,42,0.10)] ring-1 ring-black/5'
           onClick={() => setModalOpen(true)}
         >
-          <div className='flex flex-col sm:flex-row'>
+          <div className='flex flex-col items-stretch sm:flex-row'>
             {imageBlock}
             <div className='flex min-h-56 flex-1 flex-col justify-center p-6 sm:min-h-64 sm:p-8'>
               <div className='mb-3 flex flex-wrap items-center gap-2'>
@@ -163,7 +163,7 @@ const TeamMemberCard = ({
                 <div className='flex flex-col sm:flex-row'>
                   <div className='relative h-64 shrink-0 bg-slate-200 sm:h-auto sm:w-2/5'>
                     {image ? (
-                      <Image src={assetPath(image)} alt={name} fill unoptimized sizes='40vw' className='object-cover transition-transform duration-700 ease-out group-hover:scale-105' />
+                      <Image src={assetPath(image)} alt={name} fill unoptimized sizes='40vw' className='object-cover object-[center_28%] transition-transform duration-700 ease-out group-hover:scale-105' />
                     ) : (
                       <div className='flex h-full min-h-64 items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'>
                         <span className='text-7xl font-black text-white/80'>{name.charAt(0)}</span>
@@ -206,7 +206,7 @@ const TeamMemberCard = ({
           }`}
         >
           {image ? (
-            <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 768px) 100vw, 20vw' className='object-cover transition-transform duration-700 ease-out group-hover:scale-105' />
+            <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 768px) 100vw, 20vw' className='object-cover object-[center_28%] transition-transform duration-700 ease-out group-hover:scale-105' />
           ) : (
             <div className='flex h-full items-center justify-center'>
               <span className='text-6xl font-black text-white/80'>{name.charAt(0).toUpperCase()}</span>
@@ -240,7 +240,7 @@ const TeamMemberCard = ({
             >
               <div className='relative mx-auto h-48 w-48 overflow-hidden rounded-2xl bg-slate-200'>
                 {image ? (
-                  <Image src={assetPath(image)} alt={name} fill unoptimized sizes='192px' className='object-cover' />
+                  <Image src={assetPath(image)} alt={name} fill unoptimized sizes='192px' className='object-cover object-[center_28%]' />
                 ) : (
                   <div className='flex h-full items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'>
                     <span className='text-6xl font-black text-white/80'>{name.charAt(0)}</span>
