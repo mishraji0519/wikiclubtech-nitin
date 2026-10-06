@@ -80,9 +80,6 @@ const TeamSections = ({
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className='mb-10 text-center'
             >
-              <p className='mb-2 text-xs font-bold uppercase tracking-[0.24em] text-primary'>
-                {roleMembers.length} {roleMembers.length === 1 ? 'member' : 'members'}
-              </p>
               <h2 className='text-3xl font-bold md:text-4xl'>{roleLabels[role]}</h2>
             </motion.div>
 
