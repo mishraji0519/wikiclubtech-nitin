@@ -64,7 +64,7 @@ const TeamSections = ({
 
         const gridClass =
           role === 'mentor'
-            ? 'mx-auto grid max-w-5xl grid-cols-1 gap-8'
+            ? 'mx-auto max-w-5xl space-y-6'
             : role === 'envoy'
               ? 'mx-auto grid max-w-6xl grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3'
               : role === 'volunteer'
@@ -80,6 +80,9 @@ const TeamSections = ({
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
               className='mb-10 text-center'
             >
+              <p className='mb-2 text-xs font-bold uppercase tracking-[0.24em] text-primary'>
+                {roleMembers.length} {roleMembers.length === 1 ? 'member' : 'members'}
+              </p>
               <h2 className='text-3xl font-bold md:text-4xl'>{roleLabels[role]}</h2>
             </motion.div>
 
@@ -95,13 +98,7 @@ const TeamSections = ({
                     delay: Math.min(index * 0.08, 0.32),
                     ease: [0.22, 1, 0.36, 1],
                   }}
-                  className={
-                    role === 'envoy'
-                      ? 'flex h-full w-full max-w-sm lg:h-[28rem]'
-                      : role === 'mentor'
-                        ? 'flex h-full w-full lg:h-[28rem]'
-                        : 'w-full'
-                  }
+                  className={role === 'envoy' ? 'w-full max-w-sm' : 'w-full'}
                 >
                   <TeamMemberCard {...member} demo={member.id.startsWith('demo-')} />
                 </motion.div>
