@@ -10,6 +10,7 @@ import {
   founderDemoMembers,
   previousTeamMembers,
 } from '@/data/team_data/teamMembers';
+import { facultyCoordinator } from '@/data/team_data/facultyCoordinator';
 import { Button } from '@/components/ui/button';
 import WikimediaBackground from '@/components/team/WikimediaBackground';
 import CursorGlow from '@/components/team/CursorGlow';
@@ -202,6 +203,25 @@ const FoundersSection = () => {
   );
 };
 
+const FacultyCoordinatorSection = () => {
+  return (
+    <section aria-labelledby='faculty-coordinator-heading' className='mb-28'>
+      <div className='mx-auto mb-10 max-w-3xl text-center'>
+        <h2
+          id='faculty-coordinator-heading'
+          className='text-4xl font-black tracking-tight md:text-5xl'
+        >
+          Our Faculty Coordinator
+        </h2>
+      </div>
+
+      <div className='mx-auto max-w-5xl'>
+        <TeamMemberCard {...facultyCoordinator} />
+      </div>
+    </section>
+  );
+};
+
 const Index = () => {
   const [showPreviousTeam, setShowPreviousTeam] = useState(false);
   const displayedCurrentMembers = (
@@ -305,29 +325,16 @@ const Index = () => {
             transition={{ duration: 0.8 }}
             className='text-center'
           >
-            <motion.div
-              animate={{ rotate: [0, 5, -5, 0], scale: [1, 1.05, 1] }}
-              transition={{ duration: 3, repeat: Infinity, repeatDelay: 2 }}
-              className='mb-8 inline-block'
-            >
-              <div className='relative flex h-24 w-24 items-center justify-center rounded-3xl'>
-                <Image
-                  src={assetPath('/borderless_logo.svg')}
-                  width={80}
-                  height={80}
-                  alt='Wikimedia Logo'
-                  className='absolute h-20 w-20 object-contain'
-                />
-                <motion.img
-                  src={assetPath('/logo.svg')}
-                  alt='Rotating Ring'
-                  className='absolute h-20 w-20 object-contain'
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 10, repeat: Infinity, ease: 'linear' }}
-                  style={{ maskImage: 'radial-gradient(circle, transparent 60%, black 61%)' }}
-                />
-              </div>
-            </motion.div>
+            <div className='mb-8 flex justify-center'>
+              <Image
+                src={assetPath('/wikiclubtechuu.png')}
+                width={1058}
+                height={262}
+                alt='WikiClub Tech-UU'
+                className='h-auto w-[min(34rem,92vw)] object-contain'
+                priority
+              />
+            </div>
 
             <p className='mb-4 text-sm font-bold uppercase tracking-[0.28em] text-black/70'>
               Wikiclub Tech-UU • 2026–27
@@ -344,6 +351,7 @@ const Index = () => {
 
       <main className='container mx-auto max-w-7xl px-6 py-16'>
         <FoundersSection />
+        <FacultyCoordinatorSection />
 
         <section aria-labelledby='current-team-heading' className='scroll-mt-32'>
           <div className='mx-auto mb-12 max-w-3xl text-center'>
@@ -351,8 +359,11 @@ const Index = () => {
               <Users className='h-4 w-4' />
               Current Team • 2026–27
             </div>
-            <h2 id='current-team-heading' className='text-4xl font-black tracking-tight md:text-5xl'>
-              The Team Behind Wikiclub Tech-UU
+            <h2
+              id='current-team-heading'
+              className='whitespace-nowrap text-[clamp(1.15rem,4.5vw,3rem)] font-black tracking-tight'
+            >
+              Team Wikiclub Tech-UU 2026-27
             </h2>
             <p className='mt-4 text-muted-foreground'>
               Every role below currently shows a demo profile until the real 2026–27 roster is supplied.
