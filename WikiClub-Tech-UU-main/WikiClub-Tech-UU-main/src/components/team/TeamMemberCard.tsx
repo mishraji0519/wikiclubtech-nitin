@@ -117,10 +117,10 @@ const TeamMemberCard = ({
           style={{ rotateX, rotateY, transformPerspective: 900 }}
           onPointerMove={handlePointerMove}
           onPointerLeave={resetTilt}
-          className='group cursor-pointer overflow-hidden rounded-3xl bg-white shadow-[0_12px_45px_rgba(15,23,42,0.10)] ring-1 ring-black/5'
+          className='group min-h-[28rem] cursor-pointer overflow-hidden rounded-3xl bg-white shadow-[0_12px_45px_rgba(15,23,42,0.10)] ring-1 ring-black/5 sm:min-h-[28rem]'
           onClick={() => setModalOpen(true)}
         >
-          <div className='flex flex-col items-stretch sm:flex-row'>
+          <div className='flex min-h-[28rem] flex-col items-stretch sm:flex-row'>
             {imageBlock}
             <div className='flex min-h-56 flex-1 flex-col justify-center p-6 sm:min-h-64 sm:p-8'>
               <div className='mb-3 flex flex-wrap items-center gap-2'>
