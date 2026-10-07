@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Archive, ArrowDown, ArrowUp, Crown, Users } from 'lucide-react';
 import TeamMemberCard from '@/components/team/TeamMemberCard';
 import { currentTeamDemoMembers, currentTeamMembers, founderDemoMembers, previousTeamMembers } from '@/data/team_data/teamMembers';
+import { currentVolunteerDemoMembers } from '@/data/team_data/currentVolunteerDemoMembers';
 import { facultyCoordinator } from '@/data/team_data/facultyCoordinator';
 import { Button } from '@/components/ui/button';
 import WikimediaBackground from '@/components/team/WikimediaBackground';
@@ -51,7 +52,7 @@ const FacultyCoordinatorSection = () => <section aria-labelledby='faculty-coordi
 
 const Index = () => {
   const [showPreviousTeam, setShowPreviousTeam] = useState(false);
-  const displayedCurrentMembers = (currentTeamMembers.length > 0 ? currentTeamMembers : currentTeamDemoMembers).filter((member) => member.roleType !== 'coordinator');
+  const displayedCurrentMembers = (currentTeamMembers.length > 0 ? currentTeamMembers : [...currentTeamDemoMembers.filter((member) => member.roleType !== 'volunteer'), ...currentVolunteerDemoMembers]).filter((member) => member.roleType !== 'coordinator');
   const displayedPreviousMembers = previousTeamMembers.filter((member) => member.roleType !== 'coordinator');
   const [activeSection, setActiveSection] = useState<RoleFilter>('envoy');
   const [activePreviousSection, setActivePreviousSection] = useState<RoleFilter>('envoy');
