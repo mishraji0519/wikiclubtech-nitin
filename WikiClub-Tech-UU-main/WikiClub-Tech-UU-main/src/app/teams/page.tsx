@@ -79,7 +79,7 @@ const TeamSections = ({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-              className='mb-10 text-center'
+              className='mb-12 text-center'
             >
               <h2 className='text-3xl font-bold md:text-4xl'>{roleLabels[role]}</h2>
             </motion.div>
@@ -131,7 +131,7 @@ const RoleNavigation = ({
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className='sticky top-16 z-40 mb-16 flex flex-wrap justify-center gap-3 rounded-2xl border border-white/30 bg-white/80 px-4 py-4 shadow-lg backdrop-blur-xl'
+      className='sticky top-16 z-40 mb-12 flex flex-wrap justify-center gap-3 rounded-2xl border border-white/30 bg-white/80 px-4 py-4 shadow-lg backdrop-blur-xl'
     >
       {sectionOrder.map((role, index) => {
         if (!membersByRole[role]?.length) return null;
@@ -167,8 +167,8 @@ const FoundersSection = () => {
   );
 
   return (
-    <section aria-labelledby='founders-heading' className='mb-28'>
-      <div className='mx-auto mb-10 max-w-3xl text-center'>
+    <section aria-labelledby='founders-heading'>
+      <div className='mx-auto mb-12 max-w-3xl text-center'>
         <div className='mb-4 inline-flex items-center gap-2 rounded-full bg-amber-50 px-4 py-2 text-sm font-bold text-amber-700 ring-1 ring-amber-200'>
           <Crown className='h-4 w-4' />
           The Beginning
@@ -190,7 +190,7 @@ const FoundersSection = () => {
       {projectCoordinator && (
         <>
           <div className='mx-auto my-12 max-w-4xl text-center'>
-            <h3 className='text-2xl font-black tracking-tight text-slate-900 md:text-3xl'>
+            <h3 className='whitespace-nowrap text-[clamp(1.15rem,3.2vw,2.25rem)] font-black tracking-tight text-slate-900'>
               Wikiclub Tech India (Part of OKI-IIITH)
             </h3>
           </div>
@@ -205,8 +205,8 @@ const FoundersSection = () => {
 
 const FacultyCoordinatorSection = () => {
   return (
-    <section aria-labelledby='faculty-coordinator-heading' className='mb-28'>
-      <div className='mx-auto mb-10 max-w-3xl text-center'>
+    <section aria-labelledby='faculty-coordinator-heading'>
+      <div className='mx-auto mb-12 max-w-3xl text-center'>
         <h2
           id='faculty-coordinator-heading'
           className='text-4xl font-black tracking-tight md:text-5xl'
@@ -349,7 +349,7 @@ const Index = () => {
         </div>
       </header>
 
-      <main className='container mx-auto max-w-7xl px-6 py-16'>
+      <main className='container mx-auto max-w-7xl space-y-24 px-6 py-16'>
         <FoundersSection />
         <FacultyCoordinatorSection />
 
@@ -374,7 +374,7 @@ const Index = () => {
           <TeamSections members={displayedCurrentMembers} idPrefix='current' />
         </section>
 
-        <section aria-labelledby='previous-team-heading' className='mt-28 border-t border-border/60 pt-20'>
+        <section aria-labelledby='previous-team-heading' className='border-t border-border/60 pt-20'>
           <div className='mx-auto max-w-3xl text-center'>
             <div className='mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-muted/40 px-4 py-2 text-sm font-bold text-muted-foreground'>
               <Archive className='h-4 w-4' />
