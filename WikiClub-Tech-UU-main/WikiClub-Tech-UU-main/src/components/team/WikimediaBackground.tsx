@@ -1,15 +1,13 @@
-import { motion } from "framer-motion";
-
 const WikimediaBackground = () => {
   return (
     <>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {/* Soft static hero background matching the reference image. */}
+        {/* Original static hero gradient restored from the reference version. */}
         <div
           className="absolute inset-0"
           style={{
             background:
-              "radial-gradient(circle at 18% 18%, rgba(191, 219, 254, 0.62) 0%, rgba(191, 219, 254, 0) 42%), radial-gradient(circle at 82% 20%, rgba(221, 214, 254, 0.58) 0%, rgba(221, 214, 254, 0) 44%), radial-gradient(circle at 72% 82%, rgba(186, 230, 253, 0.42) 0%, rgba(186, 230, 253, 0) 42%), #fbfdfc",
+              "radial-gradient(circle at 15% 10%, rgba(210, 238, 250, 0.75) 0%, rgba(210, 238, 250, 0) 42%), radial-gradient(circle at 85% 10%, rgba(215, 250, 225, 0.8) 0%, rgba(215, 250, 225, 0) 45%), radial-gradient(circle at 80% 90%, rgba(255, 245, 235, 0.65) 0%, rgba(255, 245, 235, 0) 40%), #f8fcfa",
           }}
         />
       </div>
