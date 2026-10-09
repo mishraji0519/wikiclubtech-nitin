@@ -23,10 +23,10 @@ const TeamSections = ({ members, idPrefix }: { members: typeof currentTeamDemoMe
   const membersByRole = useMemo(() => groupMembersByRole(members), [members]);
   return <div className='space-y-20'>
     {sectionOrder.map((role) => { const roleMembers = membersByRole[role]; if (!roleMembers?.length) return null;
-      const gridClass = role === 'mentor' ? 'mx-auto max-w-5xl space-y-6' : role === 'envoy' ? 'mx-auto flex max-w-6xl flex-wrap justify-center gap-8' : role === 'volunteer' ? 'mx-auto grid max-w-7xl grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5' : 'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3';
+      const gridClass = role === 'mentor' ? 'mx-auto max-w-5xl space-y-6' : role === 'envoy' ? 'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3' : role === 'volunteer' ? 'mx-auto grid max-w-7xl grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5' : 'grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3';
       return <section key={`${idPrefix}-${role}`} id={`${idPrefix}-${role}`} className='scroll-mt-32'>
         <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }} className='mb-10 text-center'><h2 className='text-3xl font-bold md:text-4xl'>{roleLabels[role]}</h2></motion.div>
-        <motion.div className={gridClass}>{roleMembers.map((member, index) => <motion.div key={member.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.5, delay: Math.min(index * 0.08, 0.32), ease: [0.22, 1, 0.36, 1] }} className={role === 'envoy' ? 'w-full max-w-sm sm:w-[calc((100%-2rem)/2)] lg:w-[calc((100%-4rem)/3)]' : 'w-full'}><TeamMemberCard {...member} demo={member.id.startsWith('demo-')} /></motion.div>)}</motion.div>
+        <motion.div className={gridClass}>{roleMembers.map((member, index) => <motion.div key={member.id} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: '-60px' }} transition={{ duration: 0.5, delay: Math.min(index * 0.08, 0.32), ease: [0.22, 1, 0.36, 1] }} className='w-full'><TeamMemberCard {...member} demo={member.id.startsWith('demo-')} /></motion.div>)}</motion.div>
       </section>;
     })}
   </div>;
