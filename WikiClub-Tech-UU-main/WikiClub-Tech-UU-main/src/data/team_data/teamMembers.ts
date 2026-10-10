@@ -73,7 +73,7 @@ export const previousTeamMembers: TeamMember[] = [
     roleType: "volunteer",
     image: "/team/Harshit Pandey.jpg",
     email: "harshitpandeyy19@gmail.com",
-    linkedin: "https://www.linkedin.com/in/harshitpandeyy19-droid",
+    linkedin: "https://www.linkedin.com/in/harshit-pandey-a78929339",
     github: "https://github.com/harshitpandeyy19-droid",
     bio: "",
   },
