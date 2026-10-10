@@ -44,7 +44,6 @@ export const previousTeamMembers: TeamMember[] = [
     github: "https://github.com/AnupamYadavAnurag",
     bio: "",
   },
-
   {
     id: "4",
     name: "Rehan Khan",
@@ -74,7 +73,7 @@ export const previousTeamMembers: TeamMember[] = [
     roleType: "volunteer",
     image: "/team/Harshit Pandey.jpg",
     email: "harshitpandeyy19@gmail.com",
-    linkedin: "https://www.linkedin.com/in/harshit-pandey-a78929339",
+    linkedin: "https://www.linkedin.com/in/harshitpandeyy19-droid",
     github: "https://github.com/harshitpandeyy19-droid",
     bio: "",
   },
@@ -96,7 +95,7 @@ export const previousTeamMembers: TeamMember[] = [
     roleType: "volunteer",
     image: "/team/Sanya Gupta.jpg",
     email: "sanyag788@gmail.com",
-    linkedin: "https://www.linkedin.com/in/sanyagupta788",
+    linkedin: "https://www.linkedin.com/in/sanyag788",
     github: "https://github.com/Sanya-gg",
     bio: "",
   },
@@ -377,14 +376,8 @@ export const previousTeamMembers: TeamMember[] = [
   }
 ];
 
-/**
- * Add the new/current roster here as it is finalized.
- * The Teams page intentionally renders this list first.
- */
 export const currentTeamMembers: TeamMember[] = [
-  // Add the real 2026–27 roster here. These demo entries below are kept separate
-  // so the page can preview the final layout until the real roster is supplied.
-]; 
+];
 
 export const currentTeamDemoMembers: TeamMember[] = [
   {
@@ -436,24 +429,25 @@ export const currentTeamDemoMembers: TeamMember[] = [
 
 export const founderDemoMembers: TeamMember[] = [
   {
-    id: "demo-founder-1",
+    id: "founder-anshuman-rai",
+    name: "Anshuman Rai",
+    role: "Founder",
+    roleType: "founder",
+    image: "/team/Anshuman Rai Founder.jpg",
+    email: "anshuman.wikiclubtech@gmail.com",
+    linkedin: "https://www.linkedin.com/in/anshuman-rai-0433032b9",
+    github: "https://github.com/Anshuman-Rai-1004",
+    bio: "Anshuman Rai is the Founder of WikiClub Tech UU, driven by a vision to build a collaborative technology community around open knowledge, open-source, and innovation. He has been actively involved in organizing technical events, hackathons, workshops, and community initiatives that help students learn, build, and contribute beyond the classroom.\n\nThrough WikiClub Tech UU, he focuses on creating opportunities for students to explore technology, collaborate on real-world projects, and contribute to the wider open-knowledge ecosystem.",
+  },
+  {
+    id: "demo-founder-2",
     name: "Founder Name",
     role: "Founder",
     roleType: "founder",
     image: "",
-    email: "founder@example.com",
-    bio: "Demo founder profile — replace with the real founder's name, story, links, and photo.",
-  },
-  {
-    id: "demo-founder-2",
-    name: "Co-Founder Name",
-    role: "Co-Founder",
-    roleType: "founder",
-    image: "",
     email: "cofounder@example.com",
-    bio: "Demo co-founder profile — replace with the real co-founder's name, story, links, and photo.",
+    bio: "Demo founder profile — replace with the real founder's name, story, links, and photo.",
   },
 ];
 
-// Backwards-compatible alias for any existing imports that still use teamMembers.
 export const teamMembers = previousTeamMembers;
