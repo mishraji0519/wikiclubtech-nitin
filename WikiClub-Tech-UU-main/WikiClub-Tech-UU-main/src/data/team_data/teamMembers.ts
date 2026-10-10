@@ -376,8 +376,14 @@ export const previousTeamMembers: TeamMember[] = [
   }
 ];
 
+/**
+ * Add the new/current roster here as it is finalized.
+ * The Teams page intentionally renders this list first.
+ */
 export const currentTeamMembers: TeamMember[] = [
-];
+  // Add the real 2026–27 roster here. These demo entries below are kept separate
+  // so the page can preview the final layout until the real roster is supplied.
+]; 
 
 export const currentTeamDemoMembers: TeamMember[] = [
   {
@@ -450,4 +456,5 @@ export const founderDemoMembers: TeamMember[] = [
   },
 ];
 
+// Backwards-compatible alias for any existing imports that still use teamMembers.
 export const teamMembers = previousTeamMembers;
