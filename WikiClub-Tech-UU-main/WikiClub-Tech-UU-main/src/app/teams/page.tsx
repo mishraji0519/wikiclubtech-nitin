@@ -6,6 +6,7 @@ import { Archive, ArrowDown, ArrowUp, Crown, Users } from 'lucide-react';
 import TeamMemberCard from '@/components/team/TeamMemberCard';
 import { previousTeamMembers } from '@/data/team_data/teamMembers';
 import { currentRoster, type CurrentTeamMember } from '@/data/team_data/currentRoster';
+import { currentVolunteerDemoMembers } from '@/data/team_data/currentVolunteerDemoMembers';
 import { founders } from '@/data/team_data/founders';
 import { facultyCoordinator } from '@/data/team_data/facultyCoordinator';
 import { Button } from '@/components/ui/button';
@@ -53,7 +54,7 @@ const FacultyCoordinatorSection = () => <section aria-labelledby='faculty-coordi
 
 const Index = () => {
   const [showPreviousTeam, setShowPreviousTeam] = useState(false);
-  const displayedCurrentMembers = currentRoster;
+  const displayedCurrentMembers = [...currentRoster, ...currentVolunteerDemoMembers];
   const displayedPreviousMembers = previousTeamMembers.filter((member) => member.roleType !== 'coordinator') as CurrentTeamMember[];
   const [activeSection, setActiveSection] = useState<RoleFilter>('envoy');
   const [activePreviousSection, setActivePreviousSection] = useState<RoleFilter>('envoy');
