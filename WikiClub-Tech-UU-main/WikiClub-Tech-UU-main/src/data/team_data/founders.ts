@@ -17,7 +17,7 @@ export const founders: TeamMember[] = [
     name: 'Mohd Shadab',
     role: 'Founder',
     roleType: 'founder',
-    image: '/team/Mohd Shadab.jpg',
+    image: '/team/SHADAB-FOUNDER.jpeg',
     email: 'shadab.wikiclubtech@gmail.com',
     linkedin: 'https://www.linkedin.com/in/mohdshadabdev',
     github: 'https://github.com/mohdshadabdev',
