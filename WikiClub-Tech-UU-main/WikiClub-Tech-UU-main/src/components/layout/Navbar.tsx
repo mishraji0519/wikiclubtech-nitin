@@ -6,6 +6,8 @@ import Image from 'next/image';
 import { FaBars, FaTimes, FaChevronDown } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || '/wikiclubtech-nitin';
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isProgramsOpen, setIsProgramsOpen] = useState(false);
@@ -77,7 +79,7 @@ const Navbar = () => {
           <div className='flex-shrink-0'>
             <Link href='/' className='flex items-center space-x-2'>
               <Image
-                src='/logo.svg'
+                src={`${BASE_PATH}/logo.svg`}
                 alt='WikiClub Tech Logo'
                 width={48}
                 height={48}
