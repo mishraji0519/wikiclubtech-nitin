@@ -6,7 +6,7 @@ export const founders: TeamMember[] = [
     name: 'Anshuman Rai',
     role: 'Founder',
     roleType: 'founder',
-    image: '/team/Anshuman Rai Founder.jpg',
+    image: '/team/anushuman-founder.jpeg',
     email: 'anshuman.wikiclubtech@gmail.com',
     linkedin: 'https://www.linkedin.com/in/anshuman-rai-0433032b9',
     github: 'https://github.com/Anshuman-Rai-1004',
