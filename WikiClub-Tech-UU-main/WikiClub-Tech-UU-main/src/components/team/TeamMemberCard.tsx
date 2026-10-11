@@ -86,7 +86,7 @@ const TeamMemberCard = ({
 
   const roleBadge = (
     <div className='mb-3 flex flex-wrap items-center gap-2'>
-      <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-700'>
+      <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700'>
         {team ? `${team} ${role}` : role}
       </span>
     </div>
