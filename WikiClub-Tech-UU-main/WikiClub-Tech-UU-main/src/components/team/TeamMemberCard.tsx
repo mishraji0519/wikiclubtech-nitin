@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { ComponentType } from 'react';
 import { motion, AnimatePresence, useMotionValue, useSpring } from 'framer-motion';
-import { Mail, Linkedin, Github } from 'lucide-react';
+import { Mail, Linkedin, Github, Globe } from 'lucide-react';
 import Image from 'next/image';
 
 interface TeamMemberCardProps {
@@ -12,6 +12,7 @@ interface TeamMemberCardProps {
   email?: string;
   linkedin?: string;
   github?: string;
+  metaWiki?: string;
   bio?: string;
   team?: string;
   demo?: boolean;
@@ -57,6 +58,7 @@ const TeamMemberCard = ({
   email,
   linkedin,
   github,
+  metaWiki,
   bio,
   team,
   demo = false,
@@ -97,6 +99,7 @@ const TeamMemberCard = ({
       {email && <SocialLink href={`mailto:${email}`} icon={Mail} label='Email' />}
       {linkedin && <SocialLink href={linkedin} icon={Linkedin} label='LinkedIn' />}
       {github && <SocialLink href={github} icon={Github} label='GitHub' />}
+      {metaWiki && <SocialLink href={metaWiki} icon={Globe} label='Meta-Wiki' />}
     </div>
   );
 
