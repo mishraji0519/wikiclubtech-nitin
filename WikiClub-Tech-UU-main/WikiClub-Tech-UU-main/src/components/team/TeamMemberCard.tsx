@@ -87,13 +87,8 @@ const TeamMemberCard = ({
   const roleBadge = (
     <div className='mb-3 flex flex-wrap items-center gap-2'>
       <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-700'>
-        {role}
+        {team ? `${team} ${role}` : role}
       </span>
-      {team && (
-        <span className='rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100'>
-          {team}
-        </span>
-      )}
     </div>
   );
 
@@ -181,8 +176,7 @@ const TeamMemberCard = ({
         </div>
         <div className={isCompactCard ? 'p-3' : 'p-5'}>
           <div className='flex flex-wrap items-center gap-2'>
-            <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700'>{role}</span>
-            {team && <span className='rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100'>{team}</span>}
+            <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700'>{team ? `${team} ${role}` : role}</span>
           </div>
           <h3 className={isCompactCard ? 'mt-2 text-base font-black text-slate-900' : 'mt-3 text-xl font-black text-slate-900'}>{name}</h3>
           {bio && <p className={isCompactCard ? 'mt-1 line-clamp-2 text-xs leading-5 text-slate-600' : 'mt-2 line-clamp-2 text-sm leading-6 text-slate-600'}>{bio}</p>}
@@ -195,7 +189,7 @@ const TeamMemberCard = ({
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm' onClick={() => setModalOpen(false)}>
             <motion.div layoutId={`card-${name}`} className='max-h-[90vh] w-full max-w-lg overflow-auto rounded-3xl bg-white p-8 shadow-2xl' onClick={(e) => e.stopPropagation()}>
               <div className='relative mx-auto h-48 w-48 overflow-hidden rounded-2xl bg-slate-200'>
-                {displayImage ? <Image src={assetPath(displayImage)} alt={name} fill unoptimized sizes='192px' className='object-cover object-[center_28%]' /> : <div className='flex h-full items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'><span className='text-6xl font-black text-white/80'>{name.charAt(0)}</span></div>}
+                {displayImage ? <Image src={assetPath(displayImage)} alt={name} fill unoptimized sizes='192px' className='object-cover object-[center_28%]' /> : <div className='flex h-full items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'><span className='text-6xl font-black text-white/80'>{name.charAt(0).toUpperCase()}</span></div>}
               </div>
               <div className='mt-6 text-center'>
                 <div className='flex flex-wrap justify-center gap-2'>{roleBadge}</div>
