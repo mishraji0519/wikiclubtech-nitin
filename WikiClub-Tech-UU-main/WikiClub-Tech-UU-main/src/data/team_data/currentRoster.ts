@@ -98,7 +98,7 @@ export const currentRoster: CurrentTeamMember[] = [
     role: 'Team Lead',
     roleType: 'lead',
     team: 'Development',
-    image: '',
+    image: '/team/Aditya Gaurav.jpg',
     email: 'aditya.wikiclubtech@gmail.com',
     linkedin: 'https://www.linkedin.com/in/aditya-gaurav-973aa7321?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     github: 'https://github.com/Aditya-CS-ui',
