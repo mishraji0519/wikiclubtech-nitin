@@ -1,6 +1,10 @@
 import type { TeamMember } from './teamMembers';
 
-export const founders: TeamMember[] = [
+type Founder = TeamMember & {
+  metaWiki?: string;
+};
+
+export const founders: Founder[] = [
   {
     id: 'founder-anshuman-rai',
     name: 'Anshuman Rai',
