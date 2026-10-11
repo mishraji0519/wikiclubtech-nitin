@@ -13,6 +13,7 @@ interface TeamMemberCardProps {
   linkedin?: string;
   github?: string;
   bio?: string;
+  team?: string;
   demo?: boolean;
 }
 
@@ -52,11 +53,11 @@ const TeamMemberCard = ({
   linkedin,
   github,
   bio,
+  team,
   demo = false,
 }: TeamMemberCardProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const isFeatureCard =
-    roleType === 'founder' || roleType === 'coordinator' || roleType === 'mentor';
+  const isFeatureCard = roleType === 'founder' || roleType === 'coordinator' || roleType === 'mentor';
   const isCompactCard = roleType === 'volunteer';
   const tiltX = useMotionValue(0);
   const tiltY = useMotionValue(0);
@@ -77,6 +78,19 @@ const TeamMemberCard = ({
     tiltY.set(0);
   };
 
+  const roleBadge = (
+    <div className='mb-3 flex flex-wrap items-center gap-2'>
+      <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-700'>
+        {role}
+      </span>
+      {team && (
+        <span className='rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100'>
+          {team}
+        </span>
+      )}
+    </div>
+  );
+
   const socialLinks = (
     <div className='flex flex-wrap gap-2'>
       {email && <SocialLink href={`mailto:${email}`} icon={Mail} label='Email' />}
@@ -88,20 +102,9 @@ const TeamMemberCard = ({
   const imageBlock = (
     <div className='relative min-h-56 w-full shrink-0 self-stretch overflow-hidden bg-gradient-to-br from-slate-200 via-slate-300 to-slate-500 sm:min-h-64 sm:w-2/5'>
       {image ? (
-        <Image
-          src={assetPath(image)}
-          alt={name}
-          fill
-          unoptimized
-          sizes='(max-width: 640px) 100vw, 40vw'
-          className='object-cover object-[center_28%] transition-transform duration-700 ease-out group-hover:scale-105'
-        />
+        <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 640px) 100vw, 40vw' className='object-cover object-[center_28%] transition-transform duration-700 ease-out group-hover:scale-105' />
       ) : (
-        <div className='flex h-full w-full items-center justify-center'>
-          <span className='text-6xl font-black text-white/80'>
-            {name.charAt(0).toUpperCase()}
-          </span>
-        </div>
+        <div className='flex h-full w-full items-center justify-center'><span className='text-6xl font-black text-white/80'>{name.charAt(0).toUpperCase()}</span></div>
       )}
     </div>
   );
@@ -123,24 +126,9 @@ const TeamMemberCard = ({
           <div className='flex min-h-[28rem] flex-col items-stretch sm:flex-row'>
             {imageBlock}
             <div className='flex min-h-56 flex-1 flex-col justify-center p-6 sm:min-h-64 sm:p-8'>
-              <div className='mb-3 flex flex-wrap items-center gap-2'>
-                <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-700'>
-                  {role}
-                </span>
-                {demo && (
-                  <span className='rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800'>
-                    Demo
-                  </span>
-                )}
-              </div>
-              <h3 className='text-2xl font-black tracking-tight text-slate-900 sm:text-3xl'>
-                {name}
-              </h3>
-              {bio && (
-                <p className='mt-3 line-clamp-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base'>
-                  {bio}
-                </p>
-              )}
+              {roleBadge}
+              <h3 className='text-2xl font-black tracking-tight text-slate-900 sm:text-3xl'>{name}</h3>
+              {bio && <p className='mt-3 line-clamp-3 max-w-2xl whitespace-pre-line text-sm leading-6 text-slate-600 sm:text-base'>{bio}</p>}
               <div className='mt-5'>{socialLinks}</div>
             </div>
           </div>
@@ -148,32 +136,16 @@ const TeamMemberCard = ({
 
         <AnimatePresence>
           {isModalOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm'
-              onClick={() => setModalOpen(false)}
-            >
-              <motion.div
-                layoutId={`card-${name}`}
-                className='max-h-[90vh] w-full max-w-3xl overflow-auto rounded-3xl bg-white shadow-2xl'
-                onClick={(e) => e.stopPropagation()}
-              >
+            <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm' onClick={() => setModalOpen(false)}>
+              <motion.div layoutId={`card-${name}`} className='max-h-[90vh] w-full max-w-3xl overflow-auto rounded-3xl bg-white shadow-2xl' onClick={(e) => e.stopPropagation()}>
                 <div className='flex flex-col sm:flex-row'>
                   <div className='relative h-64 shrink-0 bg-slate-200 sm:h-auto sm:w-2/5'>
-                    {image ? (
-                      <Image src={assetPath(image)} alt={name} fill unoptimized sizes='40vw' className='object-cover object-[center_28%] transition-transform duration-700 ease-out group-hover:scale-105' />
-                    ) : (
-                      <div className='flex h-full min-h-64 items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'>
-                        <span className='text-7xl font-black text-white/80'>{name.charAt(0)}</span>
-                      </div>
-                    )}
+                    {image ? <Image src={assetPath(image)} alt={name} fill unoptimized sizes='40vw' className='object-cover object-[center_28%]' /> : <div className='flex h-full min-h-64 items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'><span className='text-7xl font-black text-white/80'>{name.charAt(0)}</span></div>}
                   </div>
                   <div className='p-7 sm:p-9'>
-                    <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold uppercase tracking-wider text-slate-700'>{role}</span>
+                    {roleBadge}
                     <h2 className='mt-4 text-3xl font-black text-slate-900'>{name}</h2>
-                    {bio && <p className='mt-5 leading-7 text-slate-600'>{bio}</p>}
+                    {bio && <p className='mt-5 whitespace-pre-line leading-7 text-slate-600'>{bio}</p>}
                     <div className='mt-7'>{socialLinks}</div>
                   </div>
                 </div>
@@ -195,28 +167,16 @@ const TeamMemberCard = ({
         style={{ rotateX, rotateY, transformPerspective: 900 }}
         onPointerMove={handlePointerMove}
         onPointerLeave={resetTilt}
-        className={`group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-[0_10px_35px_rgba(15,23,42,0.08)] ring-1 ring-black/5 ${
-          isCompactCard ? 'rounded-xl' : ''
-        }`}
+        className={`group cursor-pointer overflow-hidden rounded-2xl bg-white shadow-[0_10px_35px_rgba(15,23,42,0.08)] ring-1 ring-black/5 ${isCompactCard ? 'rounded-xl' : ''}`}
         onClick={() => setModalOpen(true)}
       >
-        <div
-          className={`relative overflow-hidden bg-gradient-to-br from-slate-200 to-slate-500 ${
-            isCompactCard ? 'aspect-[5/4]' : 'aspect-[4/3]'
-          }`}
-        >
-          {image ? (
-            <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 768px) 100vw, 20vw' className='object-cover object-[center_28%] transition-transform duration-700 ease-out group-hover:scale-105' />
-          ) : (
-            <div className='flex h-full items-center justify-center'>
-              <span className='text-6xl font-black text-white/80'>{name.charAt(0).toUpperCase()}</span>
-            </div>
-          )}
+        <div className={`relative overflow-hidden bg-gradient-to-br from-slate-200 to-slate-500 ${isCompactCard ? 'aspect-[5/4]' : 'aspect-[4/3]'}`}>
+          {image ? <Image src={assetPath(image)} alt={name} fill unoptimized sizes='(max-width: 768px) 100vw, 20vw' className='object-cover object-[center_28%] transition-transform duration-700 ease-out group-hover:scale-105' /> : <div className='flex h-full items-center justify-center'><span className='text-6xl font-black text-white/80'>{name.charAt(0).toUpperCase()}</span></div>}
         </div>
         <div className={isCompactCard ? 'p-3' : 'p-5'}>
           <div className='flex flex-wrap items-center gap-2'>
             <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700'>{role}</span>
-            {demo && <span className='rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-800'>Demo</span>}
+            {team && <span className='rounded-full bg-blue-50 px-3 py-1 text-xs font-bold text-blue-700 ring-1 ring-blue-100'>{team}</span>}
           </div>
           <h3 className={isCompactCard ? 'mt-2 text-base font-black text-slate-900' : 'mt-3 text-xl font-black text-slate-900'}>{name}</h3>
           {bio && <p className={isCompactCard ? 'mt-1 line-clamp-2 text-xs leading-5 text-slate-600' : 'mt-2 line-clamp-2 text-sm leading-6 text-slate-600'}>{bio}</p>}
@@ -226,31 +186,15 @@ const TeamMemberCard = ({
 
       <AnimatePresence>
         {isModalOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm'
-            onClick={() => setModalOpen(false)}
-          >
-            <motion.div
-              layoutId={`card-${name}`}
-              className='max-h-[90vh] w-full max-w-lg overflow-auto rounded-3xl bg-white p-8 shadow-2xl'
-              onClick={(e) => e.stopPropagation()}
-            >
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm' onClick={() => setModalOpen(false)}>
+            <motion.div layoutId={`card-${name}`} className='max-h-[90vh] w-full max-w-lg overflow-auto rounded-3xl bg-white p-8 shadow-2xl' onClick={(e) => e.stopPropagation()}>
               <div className='relative mx-auto h-48 w-48 overflow-hidden rounded-2xl bg-slate-200'>
-                {image ? (
-                  <Image src={assetPath(image)} alt={name} fill unoptimized sizes='192px' className='object-cover object-[center_28%]' />
-                ) : (
-                  <div className='flex h-full items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'>
-                    <span className='text-6xl font-black text-white/80'>{name.charAt(0)}</span>
-                  </div>
-                )}
+                {image ? <Image src={assetPath(image)} alt={name} fill unoptimized sizes='192px' className='object-cover object-[center_28%]' /> : <div className='flex h-full items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'><span className='text-6xl font-black text-white/80'>{name.charAt(0)}</span></div>}
               </div>
               <div className='mt-6 text-center'>
-                <span className='rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-700'>{role}</span>
+                <div className='flex flex-wrap justify-center gap-2'>{roleBadge}</div>
                 <h2 className='mt-3 text-3xl font-black text-slate-900'>{name}</h2>
-                {bio && <p className='mt-4 leading-7 text-slate-600'>{bio}</p>}
+                {bio && <p className='mt-4 whitespace-pre-line leading-7 text-slate-600'>{bio}</p>}
                 <div className='mt-6 flex justify-center'>{socialLinks}</div>
               </div>
             </motion.div>
