@@ -80,7 +80,7 @@ export const previousTeamMembers: TeamMember[] = [
   {
     id: "7",
     name: "Kavaljeet Singh",
-    role: "Tech-Lead",
+    role: "Development Team Lead",
     roleType: "lead",
     image: "/team/KAVALJEET SINGH.jpg",
     email: "kavaljeetsingh.dev@gmail.com",
@@ -102,7 +102,7 @@ export const previousTeamMembers: TeamMember[] = [
   {
     id: "9",
     name: "Unnati Kesarwani",
-    role: "Outreach & Management Lead",
+    role: "Outreach & Management Team Lead",
     roleType: "lead",
     image: "/team/Unnati.png",
     email: "unnatikesarwani27@gmail.com",
@@ -201,7 +201,7 @@ export const previousTeamMembers: TeamMember[] = [
   {
     id: "19",
     name: "Ayush Tiwari",
-    role: "Social Media & Promotions",
+    role: "Social Media & Promotions Team Lead",
     roleType: "lead",
     image: "/team/Ayush WikiClubTech-UU.jpg",
     email: "ayush.wikiclubtech@gmail.com",
@@ -212,7 +212,7 @@ export const previousTeamMembers: TeamMember[] = [
   {
     id: "34",
     name: "Shreshth Srivastava",
-    role: "Graphics & Design",
+    role: "Graphics & Design Team Lead",
     roleType: "lead",
     image: "",
     email: "hype4shreshth@gmail.com",
