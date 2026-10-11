@@ -7,14 +7,15 @@ import Footer from "@/components/layout/Footer";
 import { Toaster } from 'sonner';
 
 const inter = Inter({ subsets: ["latin"] });
+const BASE_PATH = process.env.NEXT_PUBLIC_BASE_PATH || "/wikiclubtech-nitin";
 
 export const metadata: Metadata = {
   title: "WikiClub Tech",
   description: "The official website of the WikiClub Tech community.",
   icons: {
-    icon: "/logo.svg",
+    icon: `${BASE_PATH}/logo.svg`,
   },
-  manifest: "/manifest.json",
+  manifest: `${BASE_PATH}/manifest.json`,
 };
 
 // Keep the site on a desktop-width layout even when opened on a phone.
