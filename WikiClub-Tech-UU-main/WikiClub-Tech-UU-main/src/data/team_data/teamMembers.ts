@@ -155,17 +155,6 @@ export const previousTeamMembers: TeamMember[] = [
     bio: "",
   },
   {
-    id: "14",
-    name: "Siddharth Singh",
-    role: "Design & Social Media Lead",
-    roleType: "lead",
-    image: "/team/Siddharth Singh.png",
-    email: "siddharth.wikiclubtech@gmail.com",
-    linkedin: "https://www.linkedin.com/in/siddharth-singh-6414432b2",
-    github: "https://github.com/Siddharth-Singh-7",
-    bio: "",
-  },
-  {
     id: "15",
     name: "Vratej Dwivedi",
     role: "Volunteer",
@@ -212,12 +201,23 @@ export const previousTeamMembers: TeamMember[] = [
   {
     id: "19",
     name: "Ayush Tiwari",
-    role: "Volunteer",
-    roleType: "volunteer",
+    role: "Social Media & Promotions",
+    roleType: "lead",
     image: "/team/Ayush WikiClubTech-UU.jpg",
     email: "ayush.wikiclubtech@gmail.com",
     linkedin: "https://www.linkedin.com/in/ayush-tiwari-9601a7348",
     github: "https://github.com/ayush26011",
+    bio: "",
+  },
+  {
+    id: "34",
+    name: "Shreshth Srivastava",
+    role: "Graphics & Design",
+    roleType: "lead",
+    image: "",
+    email: "hype4shreshth@gmail.com",
+    linkedin: "https://www.linkedin.com/in/hype4shreshth",
+    github: "https://github.com/root4shreshth",
     bio: "",
   },
   {
@@ -284,17 +284,6 @@ export const previousTeamMembers: TeamMember[] = [
     email: "khushi753verma@gmail.com",
     linkedin: "https://www.linkedin.com/in/khushi-verma-818023322",
     github: "https://github.com/khushi0753",
-    bio: ""
-  },
-  {
-    id: "24",
-    name: "Anuj kesarwani",
-    role: "Volunteer",
-    roleType: "volunteer",
-    image: "/team/Anuj Kesarwani.jpg",
-    email: "anujkesarwani25@gmail.com",
-    linkedin: "https://www.linkedin.com/in/anuj-kesarwani-627b3a334?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app",
-    github: "https://github.com/anujkesarwani25",
     bio: ""
   },
   {
