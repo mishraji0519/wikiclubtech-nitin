@@ -5,7 +5,7 @@ export const facultyCoordinator: TeamMember = {
   name: 'Naveen Kumar Dubey',
   role: 'Faculty Coordinator',
   roleType: 'coordinator',
-  image: '',
+  image: '/team/NAVEEN.jpeg',
   email: 'naveen.ucer@gmail.com',
   linkedin: 'https://www.linkedin.com/in/naveen-kumar-gupta-35aa6a16',
   bio: 'Faculty Coordinator of WikiClub Tech-UU, supporting the community and its student-led initiatives.',
