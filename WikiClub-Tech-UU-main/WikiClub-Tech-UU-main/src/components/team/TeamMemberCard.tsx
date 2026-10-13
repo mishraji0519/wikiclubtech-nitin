@@ -45,9 +45,7 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, icon: Icon, label }) => (
     whileHover={{ scale: 1.12, y: -2 }}
     className='flex h-9 w-9 items-center justify-center rounded-full bg-black/5 transition-colors hover:bg-black/10'
     onClick={(e) => e.stopPropagation()}
-  >
-    <Icon className='h-4 w-4' />
-  </motion.a>
+  />
 );
 
 const TeamMemberCard = ({
@@ -117,7 +115,6 @@ const TeamMemberCard = ({
     return (
       <>
         <motion.article
-          layoutId={`card-${name}`}
           whileHover={{ y: -6, scale: 1.008 }}
           whileTap={{ scale: 0.995 }}
           transition={{ type: 'spring', stiffness: 280, damping: 22 }}
@@ -141,7 +138,14 @@ const TeamMemberCard = ({
         <AnimatePresence>
           {isModalOpen && (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm' onClick={() => setModalOpen(false)}>
-              <motion.div layoutId={`card-${name}`} className='max-h-[90vh] w-full max-w-3xl overflow-auto rounded-3xl bg-white shadow-2xl' onClick={(e) => e.stopPropagation()}>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, y: 12 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.96, y: 12 }}
+                transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+                className='max-h-[90vh] w-full max-w-3xl overflow-auto rounded-3xl bg-white shadow-2xl'
+                onClick={(e) => e.stopPropagation()}
+              >
                 <div className='flex flex-col sm:flex-row'>
                   <div className='relative h-64 shrink-0 bg-slate-200 sm:h-auto sm:w-2/5'>
                     {displayImage ? <Image src={assetPath(displayImage)} alt={name} fill unoptimized sizes='40vw' className='object-cover object-[center_28%]' /> : <div className='flex h-full min-h-64 items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'><span className='text-7xl font-black text-white/80'>{name.charAt(0)}</span></div>}
@@ -164,7 +168,6 @@ const TeamMemberCard = ({
   return (
     <>
       <motion.article
-        layoutId={`card-${name}`}
         whileHover={{ y: -7, scale: 1.012 }}
         whileTap={{ scale: 0.992 }}
         transition={{ type: 'spring', stiffness: 280, damping: 22 }}
@@ -190,7 +193,14 @@ const TeamMemberCard = ({
       <AnimatePresence>
         {isModalOpen && (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className='fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm' onClick={() => setModalOpen(false)}>
-            <motion.div layoutId={`card-${name}`} className='max-h-[90vh] w-full max-w-lg overflow-auto rounded-3xl bg-white p-8 shadow-2xl' onClick={(e) => e.stopPropagation()}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 12 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.96, y: 12 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 24 }}
+              className='max-h-[90vh] w-full max-w-lg overflow-auto rounded-3xl bg-white p-8 shadow-2xl'
+              onClick={(e) => e.stopPropagation()}
+            >
               <div className='relative mx-auto h-48 w-48 overflow-hidden rounded-2xl bg-slate-200'>
                 {displayImage ? <Image src={assetPath(displayImage)} alt={name} fill unoptimized sizes='192px' className='object-cover object-[center_28%]' /> : <div className='flex h-full items-center justify-center bg-gradient-to-br from-slate-200 to-slate-500'><span className='text-6xl font-black text-white/80'>{name.charAt(0).toUpperCase()}</span></div>}
               </div>
