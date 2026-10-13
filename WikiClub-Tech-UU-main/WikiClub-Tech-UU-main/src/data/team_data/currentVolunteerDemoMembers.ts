@@ -160,16 +160,6 @@ export const currentVolunteerDemoMembers: TeamMember[] = [
     github: 'https://github.com/chaubeyaryan53-droid',
   },
   {
-    id: 'current-aditya-gaurav-volunteer',
-    name: 'Aditya Gaurav',
-    role: 'Volunteer',
-    roleType: 'volunteer',
-    image: '/team/Aditya Gaurav.jpg',
-    email: 'aditya.wikiclubtech@gmail.com',
-    linkedin: 'https://www.linkedin.com/in/aditya-gaurav-973aa7321?utm_source=share_via&utm_content=profile&utm_medium=member_android',
-    github: 'https://github.com/Aditya-CS-ui',
-  },
-  {
     id: 'current-rudra-volunteer',
     name: 'Rudra Pratap Singh',
     role: 'Volunteer',
