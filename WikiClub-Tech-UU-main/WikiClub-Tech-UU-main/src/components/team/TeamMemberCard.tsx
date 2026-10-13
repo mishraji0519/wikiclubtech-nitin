@@ -43,9 +43,11 @@ const SocialLink: React.FC<SocialLinkProps> = ({ href, icon: Icon, label }) => (
     rel='noopener noreferrer'
     aria-label={label}
     whileHover={{ scale: 1.12, y: -2 }}
-    className='flex h-9 w-9 items-center justify-center rounded-full bg-black/5 transition-colors hover:bg-black/10'
+    className='flex h-9 w-9 items-center justify-center rounded-full bg-black/5 text-slate-900 transition-colors hover:bg-black/10'
     onClick={(e) => e.stopPropagation()}
-  />
+  >
+    <Icon className='h-4 w-4 text-slate-900' strokeWidth={2} aria-hidden='true' />
+  </motion.a>
 );
 
 const TeamMemberCard = ({
