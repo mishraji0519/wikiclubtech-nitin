@@ -55,7 +55,9 @@ const FacultyCoordinatorSection = () => <section aria-labelledby='faculty-coordi
 const Index = () => {
   const [showPreviousTeam, setShowPreviousTeam] = useState(false);
   const displayedCurrentMembers = [...currentRoster, ...currentVolunteerDemoMembers];
-  const displayedPreviousMembers = previousTeamMembers.filter((member) => member.roleType !== 'coordinator') as CurrentTeamMember[];
+  const displayedPreviousMembers = previousTeamMembers
+    .filter((member) => member.roleType !== 'coordinator')
+    .map((member) => member.name === 'Anshuman Rai' && member.role === 'Co-Envoy' ? { ...member, github: 'https://github.com/Anshuman-Rai-1004' } : member) as CurrentTeamMember[];
   const [activeSection, setActiveSection] = useState<RoleFilter>('envoy');
   const [activePreviousSection, setActivePreviousSection] = useState<RoleFilter>('envoy');
   const scrollToSection = (id: string) => { const element = document.getElementById(id); if (!element) return; const headerOffset = 120; const offsetPosition = element.getBoundingClientRect().top + window.scrollY - headerOffset; window.scrollTo({ top: offsetPosition, behavior: 'smooth' }); };
