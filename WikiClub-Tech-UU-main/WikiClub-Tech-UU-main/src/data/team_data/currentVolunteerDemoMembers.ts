@@ -240,6 +240,16 @@ export const currentVolunteerDemoMembers: TeamMember[] = [
     github: 'https://github.com/Abhinisht',
   },
   {
+    id: 'current-ashutosh-mishra-volunteer',
+    name: 'Ashutosh Mishra',
+    role: 'Volunteer',
+    roleType: 'volunteer',
+    image: '/team/Ashutosh Mishra.jpg',
+    email: 'c.t.o.curelex26@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/ashutosh-mishra-841408324',
+    github: 'https://github.com/Ashutosh26-uu',
+  },
+  {
     id: 'current-prakhar-volunteer',
     name: 'Prakhar Rai',
     role: 'Volunteer',
@@ -248,5 +258,15 @@ export const currentVolunteerDemoMembers: TeamMember[] = [
     email: 'prakharraiuu@gmail.com',
     linkedin: 'https://www.linkedin.com/in/prakhar-rai-9ab284386?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app',
     github: 'https://github.com/prakharraiuu',
+  },
+  {
+    id: 'current-akshara-volunteer',
+    name: 'Akshara Tripathi',
+    role: 'Volunteer',
+    roleType: 'volunteer',
+    image: '/team/AKSHARA TRIPATHI.jpg',
+    email: 'akshara.wikiclubtech@gmail.com',
+    linkedin: 'https://www.linkedin.com/in/akshara-tripathi-8055523a7?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    github: 'https://github.com/aksharatripathi23-svg',
   },
 ];
