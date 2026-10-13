@@ -33,7 +33,7 @@ const assetPath = (src: string) =>
 
 const uploadedPhotoOverrides: Record<string, string> = {
   'Mohd Shadab|Envoy': '/team/SHADAB-PREVIOUS-YEAR-ENVOY.jpeg',
-  'Shreshth Srivastava|Graphics & Design': '/team/SHRESHTH.jpeg',
+  'Shreshth Srivastava|Graphics & Design Team Lead': '/team/SHRESHTH.jpeg',
 };
 
 const SocialLink: React.FC<SocialLinkProps> = ({ href, icon: Icon, label }) => (
