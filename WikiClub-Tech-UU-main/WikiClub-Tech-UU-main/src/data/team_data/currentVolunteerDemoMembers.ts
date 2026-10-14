@@ -244,7 +244,7 @@ export const currentVolunteerDemoMembers: TeamMember[] = [
     name: 'Ashutosh Mishra',
     role: 'Volunteer',
     roleType: 'volunteer',
-    image: '/team/Ashutosh Mishra.jpg',
+    image: '/team/Ashutosh Mishra New.jpeg',
     email: 'c.t.o.curelex26@gmail.com',
     linkedin: 'https://www.linkedin.com/in/ashutosh-mishra-841408324',
     github: 'https://github.com/Ashutosh26-uu',
