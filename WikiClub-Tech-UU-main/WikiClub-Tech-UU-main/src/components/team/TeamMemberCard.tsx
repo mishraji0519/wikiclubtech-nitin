@@ -34,6 +34,7 @@ const assetPath = (src: string) =>
 const uploadedPhotoOverrides: Record<string, string> = {
   'Mohd Shadab|Envoy': '/team/SHADAB-PREVIOUS-YEAR-ENVOY.jpeg',
   'Shreshth Srivastava|Graphics & Design Team Lead': '/team/SHRESHTH.jpeg',
+  'Ankit Kumar Verma|Project Coordinator Wiki@IIIT Hyderabad': '/team/Ankit Verma.jpeg',
 };
 
 const SocialLink: React.FC<SocialLinkProps> = ({ href, icon: Icon, label }) => (
